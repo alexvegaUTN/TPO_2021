@@ -1,18 +1,18 @@
 Archive member included to satisfy reference by file (symbol)
 
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                               ./src/Trama_LPC845.o (TimerEvent)
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                               ./src/Trama_LPC845.o (Inicializar_GPIO)
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
                               ./src/Trama_LPC845.o (Inicializar_PLL)
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                               ./src/Trama_LPC845.o (Inicializar_SysTick)
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
-                              C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o) (ADC_Disparo)
-C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
-                              C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o) (DebounceEntradas)
-c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                              C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o) (ADC_Disparo)
+C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                              C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o) (DebounceEntradas)
+c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
                               ./src/cr_startup_lpc84x.o (__main)
 
 Discarded input sections
@@ -34,11 +34,11 @@ Discarded input sections
                 0x00000000       0x30 ./src/AP_FuncionesMDE.o
  .debug_ranges  0x00000000       0x20 ./src/AP_FuncionesMDE.o
  .debug_macro   0x00000000       0x1a ./src/AP_FuncionesMDE.o
- .debug_macro   0x00000000      0xa96 ./src/AP_FuncionesMDE.o
+ .debug_macro   0x00000000      0xa66 ./src/AP_FuncionesMDE.o
  .debug_macro   0x00000000       0x22 ./src/AP_FuncionesMDE.o
- .debug_line    0x00000000       0xe5 ./src/AP_FuncionesMDE.o
- .debug_str     0x00000000     0x2da4 ./src/AP_FuncionesMDE.o
- .comment       0x00000000       0x4d ./src/AP_FuncionesMDE.o
+ .debug_line    0x00000000       0xd1 ./src/AP_FuncionesMDE.o
+ .debug_str     0x00000000     0x2cb0 ./src/AP_FuncionesMDE.o
+ .comment       0x00000000       0x4e ./src/AP_FuncionesMDE.o
  .debug_frame   0x00000000       0x68 ./src/AP_FuncionesMDE.o
  .ARM.attributes
                 0x00000000       0x2c ./src/AP_FuncionesMDE.o
@@ -46,7 +46,7 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/AP_Inicializacion.o
  .data          0x00000000        0x0 ./src/AP_Inicializacion.o
  .bss           0x00000000        0x0 ./src/AP_Inicializacion.o
- .debug_macro   0x00000000      0xa96 ./src/AP_Inicializacion.o
+ .debug_macro   0x00000000      0xa66 ./src/AP_Inicializacion.o
  .group         0x00000000        0xc ./src/AP_MDE.o
  .group         0x00000000        0xc ./src/AP_MDE.o
  .text          0x00000000        0x0 ./src/AP_MDE.o
@@ -55,10 +55,11 @@ Discarded input sections
  .text.Trama    0x00000000       0x98 ./src/AP_MDE.o
  .text.MaquinaDeEstados
                 0x00000000       0x20 ./src/AP_MDE.o
- .bss.estados_Trama.3666
+ .bss.estados_Trama.0
                 0x00000000        0x4 ./src/AP_MDE.o
- .debug_macro   0x00000000      0xa96 ./src/AP_MDE.o
+ .debug_macro   0x00000000      0xa66 ./src/AP_MDE.o
  .debug_macro   0x00000000       0x22 ./src/AP_MDE.o
+ .group         0x00000000        0xc ./src/DR_GPIO.o
  .group         0x00000000        0xc ./src/DR_GPIO.o
  .group         0x00000000        0xc ./src/DR_GPIO.o
  .text          0x00000000        0x0 ./src/DR_GPIO.o
@@ -68,14 +69,16 @@ Discarded input sections
  .debug_abbrev  0x00000000       0x29 ./src/DR_GPIO.o
  .debug_aranges
                 0x00000000       0x18 ./src/DR_GPIO.o
- .debug_macro   0x00000000       0x1a ./src/DR_GPIO.o
- .debug_macro   0x00000000      0xa96 ./src/DR_GPIO.o
- .debug_macro   0x00000000       0x2e ./src/DR_GPIO.o
- .debug_line    0x00000000       0x8c ./src/DR_GPIO.o
- .debug_str     0x00000000     0x2df6 ./src/DR_GPIO.o
- .comment       0x00000000       0x4d ./src/DR_GPIO.o
+ .debug_macro   0x00000000       0x29 ./src/DR_GPIO.o
+ .debug_macro   0x00000000      0xa66 ./src/DR_GPIO.o
+ .debug_macro   0x00000000       0x16 ./src/DR_GPIO.o
+ .debug_macro   0x00000000       0x5e ./src/DR_GPIO.o
+ .debug_line    0x00000000       0x80 ./src/DR_GPIO.o
+ .debug_str     0x00000000     0x2e0d ./src/DR_GPIO.o
+ .comment       0x00000000       0x4e ./src/DR_GPIO.o
  .ARM.attributes
                 0x00000000       0x31 ./src/DR_GPIO.o
+ .group         0x00000000        0xc ./src/DR_SPI.o
  .group         0x00000000        0xc ./src/DR_SPI.o
  .group         0x00000000        0xc ./src/DR_SPI.o
  .group         0x00000000        0xc ./src/DR_SPI.o
@@ -91,14 +94,15 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x20 ./src/DR_SPI.o
  .debug_ranges  0x00000000       0x10 ./src/DR_SPI.o
- .debug_macro   0x00000000       0x2c ./src/DR_SPI.o
- .debug_macro   0x00000000      0xa96 ./src/DR_SPI.o
+ .debug_macro   0x00000000       0x3b ./src/DR_SPI.o
+ .debug_macro   0x00000000      0xa66 ./src/DR_SPI.o
  .debug_macro   0x00000000       0x46 ./src/DR_SPI.o
- .debug_macro   0x00000000       0x2e ./src/DR_SPI.o
+ .debug_macro   0x00000000       0x16 ./src/DR_SPI.o
+ .debug_macro   0x00000000       0x5e ./src/DR_SPI.o
  .debug_macro   0x00000000       0x76 ./src/DR_SPI.o
- .debug_line    0x00000000       0xc2 ./src/DR_SPI.o
- .debug_str     0x00000000     0x3389 ./src/DR_SPI.o
- .comment       0x00000000       0x4d ./src/DR_SPI.o
+ .debug_line    0x00000000       0xf0 ./src/DR_SPI.o
+ .debug_str     0x00000000     0x33ce ./src/DR_SPI.o
+ .comment       0x00000000       0x4e ./src/DR_SPI.o
  .debug_frame   0x00000000       0x2c ./src/DR_SPI.o
  .ARM.attributes
                 0x00000000       0x2c ./src/DR_SPI.o
@@ -118,7 +122,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/Trama_LPC845.o
  .data          0x00000000        0x0 ./src/Trama_LPC845.o
  .bss           0x00000000        0x0 ./src/Trama_LPC845.o
- .debug_macro   0x00000000      0xa96 ./src/Trama_LPC845.o
+ .debug_macro   0x00000000      0xa66 ./src/Trama_LPC845.o
+ .debug_macro   0x00000000       0x16 ./src/Trama_LPC845.o
  .text          0x00000000        0x0 ./src/aeabi_romdiv_patch.o
  .data          0x00000000        0x0 ./src/aeabi_romdiv_patch.o
  .bss           0x00000000        0x0 ./src/aeabi_romdiv_patch.o
@@ -131,7 +136,7 @@ Discarded input sections
  .debug_abbrev  0x00000000       0x12 ./src/aeabi_romdiv_patch.o
  .debug_aranges
                 0x00000000       0x28 ./src/aeabi_romdiv_patch.o
- .debug_str     0x00000000       0x7a ./src/aeabi_romdiv_patch.o
+ .debug_str     0x00000000       0x66 ./src/aeabi_romdiv_patch.o
  .debug_ranges  0x00000000       0x20 ./src/aeabi_romdiv_patch.o
  .ARM.attributes
                 0x00000000       0x1c ./src/aeabi_romdiv_patch.o
@@ -139,7 +144,7 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/cr_startup_lpc84x.o
  .data          0x00000000        0x0 ./src/cr_startup_lpc84x.o
  .bss           0x00000000        0x0 ./src/cr_startup_lpc84x.o
- .debug_macro   0x00000000      0xa96 ./src/cr_startup_lpc84x.o
+ .debug_macro   0x00000000      0xa66 ./src/cr_startup_lpc84x.o
  .group         0x00000000        0xc ./src/crp.o
  .group         0x00000000        0xc ./src/crp.o
  .text          0x00000000        0x0 ./src/crp.o
@@ -151,11 +156,11 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 ./src/crp.o
  .debug_macro   0x00000000       0x1a ./src/crp.o
- .debug_macro   0x00000000      0xa96 ./src/crp.o
+ .debug_macro   0x00000000      0xa66 ./src/crp.o
  .debug_macro   0x00000000       0x34 ./src/crp.o
  .debug_line    0x00000000       0xb1 ./src/crp.o
- .debug_str     0x00000000     0x2e2c ./src/crp.o
- .comment       0x00000000       0x4d ./src/crp.o
+ .debug_str     0x00000000     0x2d38 ./src/crp.o
+ .comment       0x00000000       0x4e ./src/crp.o
  .ARM.attributes
                 0x00000000       0x31 ./src/crp.o
  .group         0x00000000        0xc ./src/mtb.o
@@ -164,111 +169,111 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/mtb.o
  .data          0x00000000        0x0 ./src/mtb.o
  .bss           0x00000000        0x0 ./src/mtb.o
- .debug_macro   0x00000000      0xa96 ./src/mtb.o
+ .debug_macro   0x00000000      0xa66 ./src/mtb.o
  .debug_macro   0x00000000       0x82 ./src/mtb.o
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .bss.Tmr_Base  0x00000000       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000       0x5e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00000000       0x22 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .bss.Tmr_Base  0x00000000       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000       0x5e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00000000       0x22 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
  .text.Inicializar_ADC
-                0x00000000       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x00000000       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000       0x3f C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000      0x12e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000      0x5b3 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000      0x3a1 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00000000     0x55c4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .group         0x00000000        0xc C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .text          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .data          0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .bss           0x00000000        0x0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
  .text.LeerEntrada
-                0x00000000       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .debug_macro   0x00000000       0x5e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .debug_macro   0x00000000       0x22 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .text          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
- .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
- .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+                0x00000000       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_macro   0x00000000      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_macro   0x00000000       0x16 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_macro   0x00000000       0x5e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_macro   0x00000000       0x22 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .text          0x00000000        0x0 c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+ .data          0x00000000        0x0 c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+ .bss           0x00000000        0x0 c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
 
 Memory Configuration
 
@@ -289,11 +294,11 @@ LOAD ./src/aeabi_romdiv_patch.o
 LOAD ./src/cr_startup_lpc84x.o
 LOAD ./src/crp.o
 LOAD ./src/mtb.o
-LOAD C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a
+LOAD C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a
 START GROUP
-LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a
-LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v6-m/nofp\libcr_eabihelpers.a
-LOAD c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/thumb/v6-m/nofp\libgcc.a
+LOAD c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a
+LOAD c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp\libcr_eabihelpers.a
+LOAD c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/thumb/v6-m/nofp\libgcc.a
 END GROUP
                 0x00000000                __base_MFlash64 = 0x0
                 0x00000000                __base_Flash = 0x0
@@ -374,47 +379,47 @@ END GROUP
  .text.main     0x00000248       0x24 ./src/Trama_LPC845.o
                 0x00000248                main
  .text.AnalizarTimers
-                0x0000026c       0x70 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x0000026c       0x70 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x0000026c                AnalizarTimers
  .text.TimerEvent
-                0x000002dc       0x58 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x000002dc       0x58 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x000002dc                TimerEvent
  .text.Inicializar_GPIO
-                0x00000334       0xc0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x00000334       0xc0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                 0x00000334                Inicializar_GPIO
  .text.GPIO_Set
-                0x000003f4       0x7c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x000003f4       0x7c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                 0x000003f4                GPIO_Set
  .text.GPIO_Dir
-                0x00000470       0x7c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x00000470       0x7c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                 0x00000470                GPIO_Dir
  .text.GPIO_Read
-                0x000004ec       0x36 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x000004ec       0x36 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                 0x000004ec                GPIO_Read
  *fill*         0x00000522        0x2 ff
  .text.IOCON_config_io
-                0x00000524      0x164 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x00000524      0x164 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                 0x00000524                IOCON_config_io
  .text.Inicializar_PLL
-                0x00000688       0xb0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+                0x00000688       0xb0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
                 0x00000688                Inicializar_PLL
  .text.SysTick_Handler
-                0x00000738       0x3c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+                0x00000738       0x3c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                 0x00000738                SysTick_Handler
  .text.Inicializar_SysTick
-                0x00000774       0x38 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+                0x00000774       0x38 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                 0x00000774                Inicializar_SysTick
  .text.ADC_Disparo
-                0x000007ac       0x40 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                0x000007ac       0x40 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
                 0x000007ac                ADC_Disparo
  .text.ADC_SEQA_IRQHandler
-                0x000007ec       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                0x000007ec       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
                 0x000007ec                ADC_SEQA_IRQHandler
  .text.DebounceEntradas
-                0x0000081c       0xf8 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x0000081c       0xf8 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
                 0x0000081c                DebounceEntradas
  .text.__weak_main
-                0x00000914        0x8 c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+                0x00000914        0x8 c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
                 0x00000914                __weak_main
                 0x00000914                __main
  *(.rodata .rodata.* .constdata .constdata.*)
@@ -472,7 +477,7 @@ END GROUP
  *(RamFunction)
  *(.data*)
  .data.segundos
-                0x10000100        0x2 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+                0x10000100        0x2 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                 0x10000100                segundos
                 0x10000104                . = ALIGN (0x4)
  *fill*         0x10000102        0x2 ff
@@ -499,28 +504,28 @@ END GROUP
  .bss.pDivRom_uidiv
                 0x10000110        0x4 ./src/cr_startup_lpc84x.o
                 0x10000110                pDivRom_uidiv
- .bss.Tmr_Run   0x10000114       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .bss.Tmr_Run   0x10000114       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x10000114                Tmr_Run
  .bss.TMR_Events
-                0x1000018c       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x1000018c       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x1000018c                TMR_Events
  *fill*         0x100001aa        0x2 
  .bss.TMR_handlers
-                0x100001ac       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x100001ac       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x100001ac                TMR_handlers
  .bss.TMR_StandBy
-                0x10000224       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x10000224       0x1e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                 0x10000224                TMR_StandBy
  *fill*         0x10000242        0x2 
  .bss.ADC_Cuentas
-                0x10000244        0x4 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                0x10000244        0x4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
                 0x10000244                ADC_Cuentas
  .bss.BufferEntradas
-                0x10000248        0x1 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x10000248        0x1 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
                 0x10000248                BufferEntradas
  *fill*         0x10000249        0x3 
  .bss.ContadorEntradas.3777
-                0x1000024c        0x2 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x1000024c        0x2 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
  *(COMMON)
                 0x10000250                . = ALIGN (0x4)
  *fill*         0x1000024e        0x2 
@@ -547,31 +552,31 @@ END GROUP
 OUTPUT(Trama_LPC845.axf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x2422
+.debug_info     0x00000000     0x2353
  .debug_info    0x00000000       0x6c ./src/AP_Inicializacion.o
  .debug_info    0x0000006c       0xb3 ./src/AP_MDE.o
- .debug_info    0x0000011f      0x162 ./src/Trama_LPC845.o
- .debug_info    0x00000281      0x255 ./src/cr_startup_lpc84x.o
- .debug_info    0x000004d6       0x54 ./src/mtb.o
- .debug_info    0x0000052a      0x17d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_info    0x000006a7      0xb49 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_info    0x000011f0      0x5b6 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_info    0x000017a6      0x200 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_info    0x000019a6      0x97e C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_info    0x00002324       0xfe C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_info    0x0000011f       0x86 ./src/Trama_LPC845.o
+ .debug_info    0x000001a5      0x262 ./src/cr_startup_lpc84x.o
+ .debug_info    0x00000407       0x54 ./src/mtb.o
+ .debug_info    0x0000045b      0x17d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_info    0x000005d8      0xb49 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_info    0x00001121      0x5b6 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_info    0x000016d7      0x200 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_info    0x000018d7      0x97e C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_info    0x00002255       0xfe C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
-.debug_abbrev   0x00000000      0xad4
+.debug_abbrev   0x00000000      0xa7c
  .debug_abbrev  0x00000000       0x7a ./src/AP_Inicializacion.o
  .debug_abbrev  0x0000007a       0xaf ./src/AP_MDE.o
- .debug_abbrev  0x00000129       0xac ./src/Trama_LPC845.o
- .debug_abbrev  0x000001d5      0x12a ./src/cr_startup_lpc84x.o
- .debug_abbrev  0x000002ff       0x46 ./src/mtb.o
- .debug_abbrev  0x00000345       0xce C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_abbrev  0x00000413      0x202 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_abbrev  0x00000615      0x11a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_abbrev  0x0000072f      0x133 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_abbrev  0x00000862      0x19f C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_abbrev  0x00000a01       0xd3 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_abbrev  0x00000129       0x49 ./src/Trama_LPC845.o
+ .debug_abbrev  0x00000172      0x135 ./src/cr_startup_lpc84x.o
+ .debug_abbrev  0x000002a7       0x46 ./src/mtb.o
+ .debug_abbrev  0x000002ed       0xce C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_abbrev  0x000003bb      0x202 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_abbrev  0x000005bd      0x11a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_abbrev  0x000006d7      0x133 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_abbrev  0x0000080a      0x19f C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_abbrev  0x000009a9       0xd3 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
 .debug_aranges  0x00000000      0x1f0
  .debug_aranges
@@ -585,107 +590,107 @@ LOAD linker stubs
  .debug_aranges
                 0x000000d0       0x18 ./src/mtb.o
  .debug_aranges
-                0x000000e8       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x000000e8       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
  .debug_aranges
-                0x00000110       0x40 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x00000110       0x40 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
  .debug_aranges
-                0x00000150       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+                0x00000150       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
  .debug_aranges
-                0x00000170       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+                0x00000170       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
  .debug_aranges
-                0x00000198       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                0x00000198       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
  .debug_aranges
-                0x000001c8       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x000001c8       0x28 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
 .debug_ranges   0x00000000      0x138
  .debug_ranges  0x00000000       0x18 ./src/AP_Inicializacion.o
  .debug_ranges  0x00000018       0x18 ./src/AP_MDE.o
  .debug_ranges  0x00000030       0x10 ./src/Trama_LPC845.o
  .debug_ranges  0x00000040       0x50 ./src/cr_startup_lpc84x.o
- .debug_ranges  0x00000090       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_ranges  0x000000a8       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_ranges  0x000000d8       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_ranges  0x000000e8       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_ranges  0x00000100       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_ranges  0x00000120       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_ranges  0x00000090       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_ranges  0x000000a8       0x30 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_ranges  0x000000d8       0x10 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_ranges  0x000000e8       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_ranges  0x00000100       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_ranges  0x00000120       0x18 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
-.debug_macro    0x00000000     0x709f
+.debug_macro    0x00000000     0x7089
  .debug_macro   0x00000000       0x25 ./src/AP_Inicializacion.o
  .debug_macro   0x00000025       0x42 ./src/AP_MDE.o
  .debug_macro   0x00000067      0x106 ./src/Trama_LPC845.o
  .debug_macro   0x0000016d       0x82 ./src/Trama_LPC845.o
- .debug_macro   0x000001ef       0x16 ./src/Trama_LPC845.o
- .debug_macro   0x00000205       0x22 ./src/Trama_LPC845.o
- .debug_macro   0x00000227       0x28 ./src/Trama_LPC845.o
- .debug_macro   0x0000024f       0x5e ./src/Trama_LPC845.o
- .debug_macro   0x000002ad       0x3f ./src/Trama_LPC845.o
- .debug_macro   0x000002ec       0x10 ./src/Trama_LPC845.o
- .debug_macro   0x000002fc      0x12e ./src/Trama_LPC845.o
- .debug_macro   0x0000042a      0x5b3 ./src/Trama_LPC845.o
- .debug_macro   0x000009dd      0x3a1 ./src/Trama_LPC845.o
- .debug_macro   0x00000d7e     0x55c4 ./src/Trama_LPC845.o
- .debug_macro   0x00006342       0x22 ./src/Trama_LPC845.o
- .debug_macro   0x00006364       0x23 ./src/cr_startup_lpc84x.o
- .debug_macro   0x00006387       0x29 ./src/mtb.o
- .debug_macro   0x000063b0       0x10 ./src/mtb.o
- .debug_macro   0x000063c0       0x33 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_macro   0x000063f3      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_macro   0x00006e7d       0x7b C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_macro   0x00006ef8       0x64 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_macro   0x00006f5c       0xad C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_macro   0x00007009       0x64 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_macro   0x0000706d       0x32 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_macro   0x000001ef       0x22 ./src/Trama_LPC845.o
+ .debug_macro   0x00000211       0x28 ./src/Trama_LPC845.o
+ .debug_macro   0x00000239       0x5e ./src/Trama_LPC845.o
+ .debug_macro   0x00000297       0x3f ./src/Trama_LPC845.o
+ .debug_macro   0x000002d6       0x10 ./src/Trama_LPC845.o
+ .debug_macro   0x000002e6      0x12e ./src/Trama_LPC845.o
+ .debug_macro   0x00000414      0x5b3 ./src/Trama_LPC845.o
+ .debug_macro   0x000009c7      0x3a1 ./src/Trama_LPC845.o
+ .debug_macro   0x00000d68     0x55c4 ./src/Trama_LPC845.o
+ .debug_macro   0x0000632c       0x22 ./src/Trama_LPC845.o
+ .debug_macro   0x0000634e       0x23 ./src/cr_startup_lpc84x.o
+ .debug_macro   0x00006371       0x29 ./src/mtb.o
+ .debug_macro   0x0000639a       0x10 ./src/mtb.o
+ .debug_macro   0x000063aa       0x33 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_macro   0x000063dd      0xa8a C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_macro   0x00006e67       0x7b C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_macro   0x00006ee2       0x64 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_macro   0x00006f46       0xad C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_macro   0x00006ff3       0x64 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_macro   0x00007057       0x32 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
-.debug_line     0x00000000     0x13c3
- .debug_line    0x00000000       0xe1 ./src/AP_Inicializacion.o
- .debug_line    0x000000e1      0x120 ./src/AP_MDE.o
- .debug_line    0x00000201      0x362 ./src/Trama_LPC845.o
- .debug_line    0x00000563      0x14d ./src/cr_startup_lpc84x.o
- .debug_line    0x000006b0       0xce ./src/mtb.o
- .debug_line    0x0000077e      0x118 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_line    0x00000896      0x307 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_line    0x00000b9d      0x220 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_line    0x00000dbd      0x26b C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_line    0x00001028      0x248 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_line    0x00001270      0x153 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+.debug_line     0x00000000     0x1387
+ .debug_line    0x00000000       0xcd ./src/AP_Inicializacion.o
+ .debug_line    0x000000cd      0x10c ./src/AP_MDE.o
+ .debug_line    0x000001d9      0x34e ./src/Trama_LPC845.o
+ .debug_line    0x00000527      0x14d ./src/cr_startup_lpc84x.o
+ .debug_line    0x00000674       0xce ./src/mtb.o
+ .debug_line    0x00000742      0x118 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_line    0x0000085a      0x307 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_line    0x00000b61      0x220 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_line    0x00000d81      0x26b C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_line    0x00000fec      0x248 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_line    0x00001234      0x153 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
-.debug_str      0x00000000    0x33927
- .debug_str     0x00000000     0x2da3 ./src/AP_Inicializacion.o
- .debug_str     0x00002da3       0xa6 ./src/AP_MDE.o
-                               0x2dfc (size before relaxing)
- .debug_str     0x00002e49    0x2ff42 ./src/Trama_LPC845.o
-                              0x32d0b (size before relaxing)
- .debug_str     0x00032d8b      0x1e2 ./src/cr_startup_lpc84x.o
-                               0x2f2b (size before relaxing)
- .debug_str     0x00032f6d       0xd0 ./src/mtb.o
-                               0x3261 (size before relaxing)
- .debug_str     0x0003303d       0x78 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+.debug_str      0x00000000    0x33c23
+ .debug_str     0x00000000     0x2caf ./src/AP_Inicializacion.o
+ .debug_str     0x00002caf       0xa6 ./src/AP_MDE.o
+                               0x2d08 (size before relaxing)
+ .debug_str     0x00002d55    0x2feba ./src/Trama_LPC845.o
+                              0x32b8f (size before relaxing)
+ .debug_str     0x00032c0f      0x1ce ./src/cr_startup_lpc84x.o
+                               0x2e23 (size before relaxing)
+ .debug_str     0x00032ddd       0xd0 ./src/mtb.o
+                               0x316d (size before relaxing)
+ .debug_str     0x00032ead      0x4c2 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                                0x2e2c (size before relaxing)
- .debug_str     0x000330b5      0x5ae C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_str     0x0003336f      0x5e4 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                               0x32cea (size before relaxing)
- .debug_str     0x00033663       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_str     0x00033953       0x20 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
                               0x32896 (size before relaxing)
- .debug_str     0x00033683       0x79 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_str     0x00033973       0x85 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                               0x3271c (size before relaxing)
- .debug_str     0x000336fc      0x1d0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_str     0x000339f8      0x1d0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
                               0x32a67 (size before relaxing)
- .debug_str     0x000338cc       0x5b C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_str     0x00033bc8       0x5b C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
                                0x2f5b (size before relaxing)
 
-.comment        0x00000000       0x4c
- .comment       0x00000000       0x4c ./src/AP_Inicializacion.o
+.comment        0x00000000       0x99
+ .comment       0x00000000       0x4d ./src/AP_Inicializacion.o
+                                 0x4e (size before relaxing)
+ .comment       0x0000004d       0x4e ./src/AP_MDE.o
+ .comment       0x0000004d       0x4e ./src/Trama_LPC845.o
+ .comment       0x0000004d       0x4e ./src/cr_startup_lpc84x.o
+ .comment       0x0000004d       0x4e ./src/mtb.o
+ .comment       0x0000004d       0x4c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                                  0x4d (size before relaxing)
- .comment       0x0000004c       0x4d ./src/AP_MDE.o
- .comment       0x0000004c       0x4d ./src/Trama_LPC845.o
- .comment       0x0000004c       0x4d ./src/cr_startup_lpc84x.o
- .comment       0x0000004c       0x4d ./src/mtb.o
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .comment       0x0000004c       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
- .comment       0x0000004c       0x4d c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+ .comment       0x00000099       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .comment       0x00000099       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .comment       0x00000099       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .comment       0x00000099       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .comment       0x00000099       0x4d C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .comment       0x00000099       0x4e c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
 
 .ARM.attributes
                 0x00000000       0x2a
@@ -700,77 +705,77 @@ LOAD linker stubs
  .ARM.attributes
                 0x000000b0       0x31 ./src/mtb.o
  .ARM.attributes
-                0x000000e1       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                0x000000e1       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
  .ARM.attributes
-                0x0000010d       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                0x0000010d       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
  .ARM.attributes
-                0x00000139       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+                0x00000139       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
  .ARM.attributes
-                0x00000165       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+                0x00000165       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
  .ARM.attributes
-                0x00000191       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                0x00000191       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
  .ARM.attributes
-                0x000001bd       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                0x000001bd       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
  .ARM.attributes
-                0x000001e9       0x2c c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+                0x000001e9       0x2c c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
 
 .debug_frame    0x00000000      0x40c
  .debug_frame   0x00000000       0x48 ./src/AP_Inicializacion.o
  .debug_frame   0x00000048       0x4c ./src/AP_MDE.o
  .debug_frame   0x00000094       0x2c ./src/Trama_LPC845.o
  .debug_frame   0x000000c0      0x118 ./src/cr_startup_lpc84x.o
- .debug_frame   0x000001d8       0x50 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
- .debug_frame   0x00000228       0xb0 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
- .debug_frame   0x000002d8       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
- .debug_frame   0x00000304       0x4c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
- .debug_frame   0x00000350       0x6c C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
- .debug_frame   0x000003bc       0x50 C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+ .debug_frame   0x000001d8       0x50 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+ .debug_frame   0x00000228       0xb0 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+ .debug_frame   0x000002d8       0x2c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+ .debug_frame   0x00000304       0x4c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ .debug_frame   0x00000350       0x6c C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ .debug_frame   0x000003bc       0x50 C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 
 Cross Reference Table
 
 Symbol                                            File
-ADC_Cuentas                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
-ADC_Disparo                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
-                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+ADC_Cuentas                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ADC_Disparo                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
 ADC_OVR_IRQHandler                                ./src/cr_startup_lpc84x.o
-ADC_SEQA_IRQHandler                               C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+ADC_SEQA_IRQHandler                               C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
                                                   ./src/cr_startup_lpc84x.o
 ADC_SEQB_IRQHandler                               ./src/cr_startup_lpc84x.o
 ADC_THCMP_IRQHandler                              ./src/cr_startup_lpc84x.o
-AnalizarTimers                                    C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
-                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+AnalizarTimers                                    C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
 BOD_IRQHandler                                    ./src/cr_startup_lpc84x.o
-BufferEntradas                                    C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+BufferEntradas                                    C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 CMP_IRQHandler                                    ./src/cr_startup_lpc84x.o
 CRP_WORD                                          ./src/crp.o
 CTIMER0_IRQHandler                                ./src/cr_startup_lpc84x.o
 DAC0_IRQHandler                                   ./src/cr_startup_lpc84x.o
 DMA_IRQHandler                                    ./src/cr_startup_lpc84x.o
-DebounceEntradas                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
-                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+DebounceEntradas                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
 FAIM_IRQHandler                                   ./src/cr_startup_lpc84x.o
 FLASH_IRQHandler                                  ./src/cr_startup_lpc84x.o
-GPIO_Dir                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
-GPIO_Read                                         C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
-                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
-GPIO_Set                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+GPIO_Dir                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+GPIO_Read                                         C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+                                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+GPIO_Set                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
 HardFault_Handler                                 ./src/cr_startup_lpc84x.o
 I2C0_IRQHandler                                   ./src/cr_startup_lpc84x.o
 I2C1_IRQHandler                                   ./src/cr_startup_lpc84x.o
 I2C2_IRQHandler                                   ./src/cr_startup_lpc84x.o
 I2C3_IRQHandler                                   ./src/cr_startup_lpc84x.o
-IOCON_config_io                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+IOCON_config_io                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
 Inicializar                                       ./src/AP_Inicializacion.o
                                                   ./src/Trama_LPC845.o
-Inicializar_ADC                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
-Inicializar_GPIO                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
+Inicializar_ADC                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_adc.o)
+Inicializar_GPIO                                  C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_gpio.o)
                                                   ./src/Trama_LPC845.o
-Inicializar_PLL                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
+Inicializar_PLL                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_pll.o)
                                                   ./src/Trama_LPC845.o
-Inicializar_SysTick                               C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+Inicializar_SysTick                               C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                                                   ./src/Trama_LPC845.o
 IntDefaultHandler                                 ./src/cr_startup_lpc84x.o
-LeerEntrada                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
+LeerEntrada                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_entradas.o)
 MRT_IRQHandler                                    ./src/cr_startup_lpc84x.o
 MaquinaDeEstados                                  ./src/AP_MDE.o
 NMI_Handler                                       ./src/cr_startup_lpc84x.o
@@ -793,15 +798,15 @@ SPI0_IRQHandler                                   ./src/cr_startup_lpc84x.o
 SPI1_IRQHandler                                   ./src/cr_startup_lpc84x.o
 SPI_Init                                          ./src/DR_SPI.o
 SVC_Handler                                       ./src/cr_startup_lpc84x.o
-SysTick_Handler                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+SysTick_Handler                                   C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
                                                   ./src/cr_startup_lpc84x.o
-TMR_Events                                        C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
-TMR_StandBy                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
-TMR_handlers                                      C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
-TimerEvent                                        C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+TMR_Events                                        C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+TMR_StandBy                                       C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+TMR_handlers                                      C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+TimerEvent                                        C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
                                                   ./src/Trama_LPC845.o
-Tmr_Base                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
-Tmr_Run                                           C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+Tmr_Base                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
+Tmr_Run                                           C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(DR_Timers.o)
 UART0_IRQHandler                                  ./src/cr_startup_lpc84x.o
 UART1_IRQHandler                                  ./src/cr_startup_lpc84x.o
 UART2_IRQHandler                                  ./src/cr_startup_lpc84x.o
@@ -814,11 +819,11 @@ __aeabi_uidivmod                                  ./src/aeabi_romdiv_patch.o
 __bss_section_table_end                           ./src/cr_startup_lpc84x.o
 __data_section_table                              ./src/cr_startup_lpc84x.o
 __data_section_table_end                          ./src/cr_startup_lpc84x.o
-__main                                            c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+__main                                            c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
                                                   ./src/cr_startup_lpc84x.o
 __mtb_buffer__                                    ./src/mtb.o
 __valid_user_code_checksum                        ./src/cr_startup_lpc84x.o
-__weak_main                                       c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+__weak_main                                       c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
 _vStackTop                                        ./src/cr_startup_lpc84x.o
 bss_init                                          ./src/cr_startup_lpc84x.o
 data_init                                         ./src/cr_startup_lpc84x.o
@@ -827,11 +832,11 @@ f_Comando_Led                                     ./src/AP_FuncionesMDE.o
 f_TX_Uart                                         ./src/AP_FuncionesMDE.o
 g_pfnVectors                                      ./src/cr_startup_lpc84x.o
 main                                              ./src/Trama_LPC845.o
-                                                  c:/nxp/mcuxpressoide_11.3.1_5262/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.3.0.202008311133/tools/bin/../lib/gcc/arm-none-eabi/9.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
+                                                  c:/nxp/mcuxpressoide_11.4.1_6260/ide/plugins/com.nxp.mcuxpresso.tools.win32_11.4.0.202103011116/tools/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp\libcr_c.a(__weak__main.o)
 pDivRom_idiv                                      ./src/cr_startup_lpc84x.o
                                                   ./src/aeabi_romdiv_patch.o
 pDivRom_uidiv                                     ./src/cr_startup_lpc84x.o
                                                   ./src/aeabi_romdiv_patch.o
 s_RX_Uart                                         ./src/AP_FuncionesMDE.o
                                                   ./src/AP_MDE.o
-segundos                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes_LPC845\lib\libLIB545_INFO2.a(dr_systick.o)
+segundos                                          C:\Users\alexx\Documents\INFO2_2021\Fuentes LPC845\lib\libLIB545_INFO2.a(dr_systick.o)

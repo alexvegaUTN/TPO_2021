@@ -34,6 +34,8 @@ private slots:
     void on_Boton_Conectar_clicked();
     void on_Boton_Abrir_clicked();
 
+    void on_Boton_Actualizar_Puertos_clicked();
+
 private:
     Ui::MainWindow *ui;
     QMediaPlayer *reproductor;

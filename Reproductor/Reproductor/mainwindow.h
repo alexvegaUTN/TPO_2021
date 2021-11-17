@@ -23,6 +23,16 @@ public:
     bool conectado();
     void enumerarPuertos();
     void actualizarEstadoConexion();
+    void onDatosRecibidos();
+    void ProcesarDatosRecibidos();
+
+    enum
+    {
+        ESPERO_MENSAJE,
+        RECIBO_MENSAJE_MSB,
+        RECIBO_MENSAJE_LSB,
+        FIN_DE_TRAMA,
+    };
 
 private slots:
 
@@ -40,6 +50,7 @@ private:
     Ui::MainWindow *ui;
     QMediaPlayer *reproductor;
     QSerialPort  *port;
+    QByteArray  datosRecibidos;
 
 };
 #endif // MAINWINDOW_H

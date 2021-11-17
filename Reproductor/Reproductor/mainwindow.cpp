@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
                 ui->Progreso_Musica->setMaximum(duracion);
             });
 
+
 }
 
 MainWindow::~MainWindow()
@@ -75,18 +76,62 @@ void MainWindow::on_Boton_Play_clicked()
 //    reproductor->setMedia(QUrl("qrc:/Musicas/Roses.mp3"));
     reproductor->setVolume(10);
     reproductor->play();
+
+    QString Comando;
+    QByteArray MSJ;
+
+    if( conectado() )
+    {
+        Comando = "$PLAY#";
+    }
+    else
+    {
+        QMessageBox::critical(this, "Error PLAY", "No se pudo detener la Musica, Conecte el dispocitivo! ");
+    }
+
+    MSJ.append(Comando);
+    port->write(MSJ);
 }
 
 
 void MainWindow::on_Boton_Pause_clicked()
 {
     reproductor->pause();
+    QString Comando;
+    QByteArray MSJ;
+
+    if( conectado() )
+    {
+        Comando = "$PAUSA#";
+    }
+    else
+    {
+        QMessageBox::critical(this, "Error PAUSE ", "No se pudo detener la Musica, Conecte el dispocitivo! ");
+    }
+
+    MSJ.append(Comando);
+    port->write(MSJ);
 }
 
 
 void MainWindow::on_Boton_Stop_clicked()
 {
-    reproductor->stop();
+    reproductor->stop(); // lo reproduce ne la compu
+    QString Comando;
+    QByteArray MSJ;
+
+    if( conectado() )
+    {
+        Comando = "$STOP#";
+    }
+    else
+    {
+        QMessageBox::critical(this, "Error STOP", "No se pudo detener la Musica, Conecte el dispocitivo! ");
+    }
+
+    MSJ.append(Comando);
+    port->write(MSJ);
+
 }
 
 
@@ -132,10 +177,12 @@ void MainWindow::on_Boton_Conectar_clicked()
         port->setParity(QSerialPort::EvenParity);
         port->setDataBits(QSerialPort::Data8);
         port->setStopBits(QSerialPort::OneStop);
+
         //Abrimos el puerto en modo lectura-escritura
         if (port->open(QIODevice::ReadWrite) == true)
         {
             //Conectamos las señales que nos interesen
+            connect( port, SIGNAL(readyRead()),this, SLOT(onDatosRecibidos()));
 
         }
         else {
@@ -177,3 +224,58 @@ void MainWindow::on_Boton_Actualizar_Puertos_clicked()
     enumerarPuertos();
 }
 
+
+void MainWindow::onDatosRecibidos()
+{
+    QByteArray bytesRX;
+    int cant = port->bytesAvailable();
+    bytesRX.resize(cant);
+
+    port->read( bytesRX.data() , bytesRX.size());
+    datosRecibidos.append(bytesRX);
+    ProcesarDatosRecibidos();
+
+}
+
+void MainWindow::ProcesarDatosRecibidos()
+{
+    static unsigned int estadoRX = ESPERO_MENSAJE;
+    static int ValorRecibido;
+
+    for ( int i = 0; i < datosRecibidos.size() ;  i++ )
+    {
+        unsigned char dato = datosRecibidos.at(i);
+
+        switch ( estadoRX )
+        {
+            case ESPERO_MENSAJE:
+                    if( dato == '#')
+                    {
+                        ValorRecibido = 0;
+                        estadoRX = RECIBO_MENSAJE_MSB;
+                    }
+                    break;
+            case RECIBO_MENSAJE_MSB:
+                    ValorRecibido = (dato << 8);
+                    estadoRX = RECIBO_MENSAJE_MSB;
+                    break;
+            case RECIBO_MENSAJE_LSB:
+                    ValorRecibido |= (dato);
+                    estadoRX = FIN_DE_TRAMA;
+                    break;
+            case FIN_DE_TRAMA:
+                    if( dato == '$')
+                    {
+                        //aqui es donde guardo el dato recibido y contemplo la accion a realizar
+                    }
+                    else
+                    {
+                        QMessageBox::critical(this, "Error", " ERROR en la Trama ");
+
+                    }
+                    break;
+        default:  estadoRX = ESPERO_MENSAJE;
+                    break;
+        }
+    }
+}

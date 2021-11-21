@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     //------------ puertos--------------------------
     port = NULL;
     enumerarPuertos();
@@ -91,6 +90,7 @@ void MainWindow::on_Boton_Play_clicked()
 
     MSJ.append(Comando);
     port->write(MSJ);
+
 }
 
 
@@ -183,6 +183,13 @@ void MainWindow::on_Boton_Conectar_clicked()
         {
             //Conectamos las señales que nos interesen
             connect( port, SIGNAL(readyRead()),this, SLOT(onDatosRecibidos()));
+            ui->textEdit_Datos_Recibidos->setText("Abrimos el puerto en modo lectura-escritura");
+
+            QString Comando;
+            QByteArray MSJ;
+            Comando = "$CONECTADO#";
+            MSJ.append(Comando);
+            port->write(MSJ);
 
         }
         else {
@@ -227,6 +234,8 @@ void MainWindow::on_Boton_Actualizar_Puertos_clicked()
 
 void MainWindow::onDatosRecibidos()
 {
+
+    ui->textEdit_Datos_Recibidos->setText("DatosRecibidos");
     QByteArray bytesRX;
     int cant = port->bytesAvailable();
     bytesRX.resize(cant);
@@ -241,6 +250,9 @@ void MainWindow::ProcesarDatosRecibidos()
 {
     static unsigned int estadoRX = ESPERO_MENSAJE;
     static int ValorRecibido;
+
+     ui->textEdit_Datos_Recibidos->setText("ProcesarDatosRecibidos");
+     ui->textEdit_Datos_Recibidos->append("RX: #" + datosRecibidos + "$");
 
     for ( int i = 0; i < datosRecibidos.size() ;  i++ )
     {
@@ -257,7 +269,7 @@ void MainWindow::ProcesarDatosRecibidos()
                     break;
             case RECIBO_MENSAJE_MSB:
                     ValorRecibido = (dato << 8);
-                    estadoRX = RECIBO_MENSAJE_MSB;
+                    estadoRX = RECIBO_MENSAJE_LSB;
                     break;
             case RECIBO_MENSAJE_LSB:
                     ValorRecibido |= (dato);
@@ -267,6 +279,7 @@ void MainWindow::ProcesarDatosRecibidos()
                     if( dato == '$')
                     {
                         //aqui es donde guardo el dato recibido y contemplo la accion a realizar
+                        ui->textEdit_Datos_Recibidos->append("RX: #" + datosRecibidos + "$");
                     }
                     else
                     {
@@ -278,4 +291,6 @@ void MainWindow::ProcesarDatosRecibidos()
                     break;
         }
     }
+
+//    datosRecibidos.clear();
 }

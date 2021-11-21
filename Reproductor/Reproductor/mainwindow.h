@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QMediaPlayer>
 #include <QSerialPort>
+#include <QSerialPortInfo>
 #include <QMessageBox>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -51,6 +53,7 @@ private:
     QMediaPlayer *reproductor;
     QSerialPort  *port;
     QByteArray  datosRecibidos;
+
 
 };
 #endif // MAINWINDOW_H

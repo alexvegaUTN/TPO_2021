@@ -6,7 +6,7 @@
  * Generated linker script file for LPC845
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.4.1 [Build 6260] [2021-09-15] on 18 oct. 2021 20:30:15
+ * MCUXpresso IDE v11.4.1 [Build 6260] [2021-09-15] on 17 nov. 2021 19:24:30
  */
 
 INCLUDE "Trama_LPC845_Debug_library.ld"

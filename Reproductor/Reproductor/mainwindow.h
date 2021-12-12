@@ -25,7 +25,6 @@ public:
     bool conectado();
     void enumerarPuertos();
     void actualizarEstadoConexion();
-    void onDatosRecibidos();
     void ProcesarDatosRecibidos();
 
     enum
@@ -47,6 +46,7 @@ private slots:
     void on_Boton_Abrir_clicked();
 
     void on_Boton_Actualizar_Puertos_clicked();
+    void onDatosRecibidos();
 
 private:
     Ui::MainWindow *ui;

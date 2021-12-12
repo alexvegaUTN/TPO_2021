@@ -1,0 +1,7 @@
+../drivers/PR_Timer.c:60:6:Timer_Event	16	static
+../drivers/PR_Timer.c:72:8:Timer_Start	32	static
+../drivers/PR_Timer.c:101:8:Timer_Set	24	static
+../drivers/PR_Timer.c:126:10:Timer_Get	24	static
+../drivers/PR_Timer.c:149:6:Timer_Standby	16	static
+../drivers/PR_Timer.c:154:6:Timer_Stop	16	static
+../drivers/PR_Timer.c:165:6:Timer_Close	16	static

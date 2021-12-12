@@ -1,0 +1,6 @@
+../drivers/DR_UART0.c:99:6:UART0_Init	24	static
+../drivers/DR_UART0.c:159:6:SetBaudRate	48	static
+../drivers/DR_UART0.c:194:9:UART0_Pop_TX	16	static
+../drivers/DR_UART0.c:211:6:UART0_Push_RX	16	static
+../drivers/DR_UART0.c:221:6:UART0_write_TX_reg	16	static
+../drivers/DR_UART0.c:230:6:USART0_IRQHandler	16	static

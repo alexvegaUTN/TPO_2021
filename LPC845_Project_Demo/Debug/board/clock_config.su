@@ -1,0 +1,6 @@
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_clock.h:580:20:CLOCK_Select	16	static
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_clock.h:612:20:CLOCK_SetCoreSysClkDiv	16	static
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_clock.h:836:20:CLOCK_SetFroOscFreq	16	static
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_power.h:153:20:POWER_DisablePD	16	static
+../board/clock_config.c:37:6:BOARD_InitBootClocks	8	static
+../board/clock_config.c:66:6:BOARD_BootClockRUN	16	static

@@ -1,0 +1,4 @@
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_clock.h:558:20:CLOCK_EnableClock	16	static
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_clock.h:569:20:CLOCK_DisableClock	16	static
+../board/pin_mux.c:36:6:BOARD_InitBootPins	8	static
+../board/pin_mux.c:63:6:BOARD_InitPins	24	static

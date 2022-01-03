@@ -1,9 +1,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "Wave.h"
 #include <QUrl>
 #include <QFileDialog>
 #include <QSerialPortInfo>
 #include <QMessageBox>
+#include <QFile>
+#include <string>
+#include <QDataStream>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -58,6 +62,7 @@ void MainWindow::actualizarEstadoConexion()
     } else {
         ui->Boton_Conectar->setStyleSheet("font-weight: normal; color: white; background-color: red;");
         ui->Boton_Conectar->setText("Desconectado");
+        datosRecibidos.clear();
     }
 }
 
@@ -213,15 +218,16 @@ void MainWindow::on_Boton_Conectar_clicked()
 void MainWindow::on_Boton_Abrir_clicked()
 {
   QString filename = QFileDialog::getOpenFileName(this,"Abrir");
+
   if( filename.isEmpty() )
   {
       return;
   }
   else
   {
-      reproductor->setMedia(QUrl::fromLocalFile(filename));
-      reproductor->setVolume(ui->Barra_Volumen->value());
 
+    ui->textEdit_Datos_Recibidos->setText(filename);
+    infoWav(filename); //<----------- AQUI le pasaria la dircecion del arrchivo
   }
 }
 
@@ -268,22 +274,22 @@ void MainWindow::ProcesarDatosRecibidos()
                     }
                     break;
             case RECIBO_MENSAJE_MSB:
-                    ValorRecibido = (dato << 8);
+//                    ValorRecibido = (dato << 8);
                     estadoRX = RECIBO_MENSAJE_LSB;
                     break;
             case RECIBO_MENSAJE_LSB:
-                    ValorRecibido |= (dato);
+//                    ValorRecibido |= (dato);
                     estadoRX = FIN_DE_TRAMA;
                     break;
             case FIN_DE_TRAMA:
                     if( dato == '$')
                     {
                         //aqui es donde guardo el dato recibido y contemplo la accion a realizar
-                        ui->textEdit_Datos_Recibidos->append("RX: #" + datosRecibidos + "$");
+                        ui->textEdit_Datos_Recibidos->setText("RX: #" + datosRecibidos + "$");
                     }
                     else
                     {
-                        QMessageBox::critical(this, "Error", " ERROR en la Trama ");
+//                        QMessageBox::critical(this, "Error", " ERROR en la Trama ");
 
                     }
                     break;
@@ -292,5 +298,6 @@ void MainWindow::ProcesarDatosRecibidos()
         }
     }
 
-//    datosRecibidos.clear();
+    //    datosRecibidos.clear();
 }
+

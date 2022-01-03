@@ -26,6 +26,7 @@ public:
     void enumerarPuertos();
     void actualizarEstadoConexion();
     void ProcesarDatosRecibidos();
+    void infoWav(const QString paths);  //-----------
 
     enum
     {

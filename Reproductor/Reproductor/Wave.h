@@ -81,7 +81,7 @@ typedef union WAV {
 typedef struct  WAV_HEADER
 {
     /* RIFF Chunk Descriptor */
-    uint8_t         RIFF[4];        // RIFF Header Magic header
+    char         RIFF[4];        // RIFF Header Magic header   uint8_t
     uint32_t        ChunkSize;      // RIFF Chunk Size
     uint8_t         WAVE[4];        // WAVE Header
     /* "fmt" sub-chunk */

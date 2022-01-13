@@ -86,7 +86,7 @@ void MainWindow::on_Boton_Play_clicked()
 
     if( conectado() )
     {
-        Comando = "$PLAY#";
+        Comando = "$CPLAY#";
     }
     else
     {
@@ -107,7 +107,7 @@ void MainWindow::on_Boton_Pause_clicked()
 
     if( conectado() )
     {
-        Comando = "$PAUSA#";
+        Comando = "$CPAUSA#";
     }
     else
     {
@@ -127,7 +127,7 @@ void MainWindow::on_Boton_Stop_clicked()
 
     if( conectado() )
     {
-        Comando = "$STOP#";
+        Comando = "$CSTOP#";
     }
     else
     {

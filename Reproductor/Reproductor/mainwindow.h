@@ -27,6 +27,7 @@ public:
     void actualizarEstadoConexion();
     void ProcesarDatosRecibidos();
     void infoWav(const QString paths);  //-----------
+    void Enviar(QString);
 
     enum
     {

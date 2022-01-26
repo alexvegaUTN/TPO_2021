@@ -17,11 +17,13 @@ CONFIG += c++11
 
 SOURCES += \
     Wave.cpp \
+    Wave2.c \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Wave.h \
+    Wave2.h \
     mainwindow.h
 
 FORMS += \

@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "Wave.h"
+//#include "Wave.h"
 #include <QUrl>
 #include <QFileDialog>
 #include <QSerialPortInfo>
@@ -8,6 +8,7 @@
 #include <QFile>
 #include <string>
 #include <QDataStream>
+#include "Wave2.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -225,7 +226,6 @@ void MainWindow::on_Boton_Abrir_clicked()
   }
   else
   {
-
     ui->textEdit_Datos_Recibidos->setText(filename);
     infoWav(filename); //<----------- AQUI le pasaria la dircecion del arrchivo
   }

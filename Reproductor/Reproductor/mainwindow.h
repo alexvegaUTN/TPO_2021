@@ -6,6 +6,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 #include <QMessageBox>
+#include <Wave2.h>
 
 
 QT_BEGIN_NAMESPACE
@@ -26,7 +27,14 @@ public:
     void enumerarPuertos();
     void actualizarEstadoConexion();
     void ProcesarDatosRecibidos();
-    void infoWav(const QString paths);  //-----------
+    void infoWav(const QString paths);
+    //-----------
+    FILE * fileManager_GetFWFile(const char * fileName);
+    uint32_t fileManager_GetFWFileSize(FILE ** p_file, const char fileName[]);
+    uint32_t fileManager_GetFWBlockQuantity(uint32_t fwLen);
+    void GetWavHeader(FILE ** p_file, const char fileName[] ,wav_hdr *p_wavHeader);
+    uint16_t fileManager_SendFWDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t wavLenght);
+    //-----------
     void Enviar(QString);
 
     enum

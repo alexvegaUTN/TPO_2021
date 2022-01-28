@@ -255,7 +255,7 @@ void MainWindow::onDatosRecibidos()
 void MainWindow::ProcesarDatosRecibidos()
 {
     static unsigned int estadoRX = ESPERO_MENSAJE;
-    static int ValorRecibido;
+    //static int ValorRecibido;
 
      ui->textEdit_Datos_Recibidos->setText("ProcesarDatosRecibidos");
      ui->textEdit_Datos_Recibidos->append("RX: #" + datosRecibidos + "$");
@@ -269,7 +269,7 @@ void MainWindow::ProcesarDatosRecibidos()
             case ESPERO_MENSAJE:
                     if( dato == '#')
                     {
-                        ValorRecibido = 0;
+                        //ValorRecibido = 0;
                         estadoRX = RECIBO_MENSAJE_MSB;
                     }
                     break;

@@ -29,13 +29,14 @@ public:
     void ProcesarDatosRecibidos();
     void infoWav(const QString paths);
     //-----------
-    FILE * fileManager_GetFWFile(const char * fileName);
-    uint32_t fileManager_GetFWFileSize(FILE ** p_file, const char fileName[]);
-    uint32_t fileManager_GetFWBlockQuantity(uint32_t fwLen);
+    FILE * fileManager_GetWavFile(const char * fileName);
+    uint32_t fileManager_GetWavFileSize(FILE ** p_file, const char fileName[]);
+    uint32_t fileManager_GetWavBlockQuantity(uint32_t fwLen);
     void GetWavHeader(FILE ** p_file, const char fileName[] ,wav_hdr *p_wavHeader);
-    uint16_t fileManager_SendFWDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t wavLenght);
+    uint16_t fileManager_SendWavDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t wavLenght);
     //-----------
     void Enviar(QString);
+    void Enviar_v2(QByteArray &msj);
 
     enum
     {

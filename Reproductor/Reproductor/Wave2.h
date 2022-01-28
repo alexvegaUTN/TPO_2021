@@ -47,13 +47,23 @@ typedef struct  WAV_HEADER
     uint32_t        Subchunk2Size;  // Sampled data length
 } wav_hdr;
 
+typedef union{
+    uint8_t array[sizeof(uint32_t)];
+    uint32_t dword;
+}buffer_u32_union_t;
+
+typedef union{
+    uint8_t array[sizeof(uint16_t)];
+    uint16_t word;
+}buffer_u16_union_t;
+
 #pragma pack(pop)
 
 FILE * fileManager_GetFWFile(const char * fileName);
 uint32_t fileManager_GetFWFileSize(FILE ** p_file, const char fileName[]); //determina el tamanio del archivo
 uint32_t fileManager_GetFWBlockQuantity(uint32_t fwLen);//determina la cantidad de bloques para el archivo
 void GetWavHeader(FILE ** p_file, const char fileName[] ,wav_hdr *p_wavHeader);
-uint16_t SendFWDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber,uint32_t desplazar);
+uint16_t SendFWDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fileLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t headerLength);
 uint16_t fileManager_SwapBytes16(uint16_t value);
 
 

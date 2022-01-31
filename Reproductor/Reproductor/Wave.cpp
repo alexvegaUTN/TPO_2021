@@ -2,6 +2,8 @@
 #include "Wave2.h"
 #include <QFile>
 #include <QDataStream>
+#include <QThread>
+#include <QVector>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <string>
@@ -12,17 +14,21 @@ using namespace std;
 
 void MainWindow::infoWav(QString paths)
 {
-    uint32_t fwLenght;
-    uint32_t wavLenght;
+    uint32_t fileLenght;
+    uint32_t wavHdrLenght;
     uint16_t blockQty;
     wav_hdr wavHeader;
     QString AudioData;
+    uint8_t audio_data;
     FILE * p_file;
     SendFilePacket_t filePacket;
 
     QByteArray path = paths.toLocal8Bit();
     QByteArray Paquete;
     QByteArray MSJ;
+
+    QVector<uint8_t>package;
+    QVector<uint8_t>message;
 
     char fileName[100];
     memcpy(fileName,path,sizeof (fileName));
@@ -34,11 +40,11 @@ void MainWindow::infoWav(QString paths)
 
     if (p_file) {
         /* Calculo longitud del Fw y la cantidad de bloques en que debe ser dividido */
-        fwLenght = fileManager_GetWavFileSize(&p_file, fileName);
-        wavLenght = sizeof (wavHeader);
-        fwLenght = fwLenght - wavLenght ;
-        blockQty = fileManager_GetWavBlockQuantity(fwLenght);
-        printf(" longitud del Fw: %d y la cantidad de bloques en que debe ser dividido: %d\n",fwLenght,blockQty);
+        fileLenght = fileManager_GetWavFileSize(&p_file, fileName);
+        wavHdrLenght = sizeof (wavHeader);
+        fileLenght = fileLenght - wavHdrLenght ;
+        blockQty = fileManager_GetWavBlockQuantity(fileLenght);
+        printf(" longitud del Fw: %d y la cantidad de bloques en que debe ser dividido: %d\n",fileLenght,blockQty);
 
         /* Capturo el header cabecera del archivo wave*/
         GetWavHeader(&p_file, fileName,&wavHeader);
@@ -49,24 +55,24 @@ void MainWindow::infoWav(QString paths)
             buffer_u32_union_t aux_u32_chunkSize;
             aux_u32_chunkSize.dword = wavHeader.ChunkSize;
 
-            AudioData = wavHeader.RIFF[0];
-            MSJ.append("$" + AudioData + wavHeader.RIFF[0] + wavHeader.RIFF[1] + wavHeader.RIFF[2] + wavHeader.RIFF[3] +
-                       aux_u32_chunkSize.array[0] + aux_u32_chunkSize.array[1] + aux_u32_chunkSize.array[2] + aux_u32_chunkSize.array[3] +
-                       wavHeader.WAVE[0] + wavHeader.WAVE[1] + wavHeader.WAVE[2] + wavHeader.WAVE[3] + "#" );
+            audio_data = wavHeader.RIFF[0];
 
-            //Enviar(MSJ);
-            Enviar_v2(MSJ);
-            MSJ.clear();
+            message.append('$');
+            message.append(audio_data);
+            for (size_t i = 0; i < sizeof wavHeader.RIFF; ++i)
+                message.append(wavHeader.RIFF[i]);
+            for (size_t i = 0; i < sizeof aux_u32_chunkSize.dword; ++i)
+                message.append(aux_u32_chunkSize.array[i]);
+            for (size_t i = 0; i < sizeof wavHeader.WAVE; ++i)
+                message.append(wavHeader.WAVE[i]);
+            message.append('#');
+
+            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+            message.clear();
         }
+
         if( wavHeader.fmt[0] == 'f' && wavHeader.fmt[1] == 'm' && wavHeader.fmt[2] == 't' )
         {
-//            QByteArray aux_byteArr_subChunk1_size(reinterpret_cast<const char *>(&wavHeader.Subchunk1Size), sizeof wavHeader.Subchunk1Size);
-//            QByteArray aux_byteArr_audioFormat(reinterpret_cast<const char *>(&wavHeader.AudioFormat), sizeof wavHeader.AudioFormat);
-//            QByteArray aux_byteArr_numOfChan(reinterpret_cast<const char *>(&wavHeader.NumOfChan), sizeof wavHeader.NumOfChan);
-//            QByteArray aux_byteArr_samplesPerSec(reinterpret_cast<const char *>(&wavHeader.SamplesPerSec), sizeof wavHeader.SamplesPerSec);
-//            QByteArray aux_byteArr_bytesPerSec(reinterpret_cast<const char *>(&wavHeader.bytesPerSec), sizeof wavHeader.bytesPerSec);
-//            QByteArray aux_byteArr_blockAlign(reinterpret_cast<const char *>(&wavHeader.blockAlign), sizeof wavHeader.blockAlign);
-//            QByteArray aux_byteArr_bitsPerSample(reinterpret_cast<const char *>(&wavHeader.bitsPerSample), sizeof wavHeader.bitsPerSample);
 
             buffer_u32_union_t aux_u32_subChunk1_size;
             buffer_u16_union_t aux_u16_audioFormat;
@@ -84,68 +90,95 @@ void MainWindow::infoWav(QString paths)
             aux_u16_blockAlign.word = wavHeader.blockAlign;
             aux_u16_bitsPerSmple.word = wavHeader.bitsPerSample;
 
-            AudioData = wavHeader.fmt[0]  ;
-            MSJ.append("$" + AudioData + wavHeader.fmt[0] + wavHeader.fmt[1] + wavHeader.fmt[2] + wavHeader.fmt[3] +
-                    aux_u32_subChunk1_size.array[0] + aux_u32_subChunk1_size.array[1] + aux_u32_subChunk1_size.array[2] + aux_u32_subChunk1_size.array[3] +
-                    aux_u16_audioFormat.array[0] + aux_u16_audioFormat.array[1] +
-                    aux_u16_numOfChan.array[0] + aux_u16_numOfChan.array[1] +
-                    aux_u32_samplesPerSec.array[0] + aux_u32_samplesPerSec.array[1] + aux_u32_samplesPerSec.array[2] + aux_u32_samplesPerSec.array[3] +
-                    aux_u32_bytesPerSec.array[0] + aux_u32_bytesPerSec.array[1] + aux_u32_bytesPerSec.array[2] + aux_u32_bytesPerSec.array[3] +
-                    aux_u16_blockAlign.array[0] + aux_u16_blockAlign.array[1] +
-                    aux_u16_bitsPerSmple.array[0] + aux_u16_bitsPerSmple.array[1] +
-                    "#" );
-//            MSJ.append("$" + AudioData + wavHeader.fmt[0] + wavHeader.fmt[1] + wavHeader.fmt[2] + wavHeader.fmt[3]);
-//            MSJ.append(aux_byteArr_subChunk1_size);     // wavHeader.Subchunk1Size
-//            MSJ.append(aux_byteArr_audioFormat);        // wavHeader.AudioFormat
-//            MSJ.append(aux_byteArr_numOfChan);          // wavHeader.NumOfChan
-//            MSJ.append(aux_byteArr_samplesPerSec);      // wavHeader.SamplesPerSec
-//            MSJ.append(aux_byteArr_bytesPerSec);        // wavHeader.bytesPerSec
-//            MSJ.append(aux_byteArr_blockAlign);         // wavHeader.blockAlign
-//            MSJ.append(aux_byteArr_bitsPerSample);      // wavHeader.bitsPerSample
-//            MSJ.append("#");
+            audio_data = wavHeader.fmt[0];
 
-            //Enviar(MSJ);
-            Enviar_v2(MSJ);
-            MSJ.clear();
+            message.append('$');
+            message.append(audio_data);
+            for (size_t i = 0; i < sizeof wavHeader.fmt; ++i) {
+                message.append(wavHeader.fmt[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u32_subChunk1_size.dword; ++i) {
+                message.append(aux_u32_subChunk1_size.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u16_audioFormat.word; ++i) {
+                message.append(aux_u16_audioFormat.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u16_numOfChan.word; ++i) {
+                message.append(aux_u16_numOfChan.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u32_samplesPerSec.dword; ++i) {
+                message.append(aux_u32_samplesPerSec.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u32_bytesPerSec.dword; ++i) {
+                message.append(aux_u32_bytesPerSec.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u16_blockAlign.word; ++i) {
+                message.append(aux_u16_blockAlign.array[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u16_bitsPerSmple.word; ++i) {
+                message.append(aux_u16_bitsPerSmple.array[i]);
+            }
+            message.append('#');
+
+            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+            message.clear();
         }
+
         if( wavHeader.Subchunk2ID[0] == 'd' && wavHeader.Subchunk2ID[1] == 'a' && wavHeader.Subchunk2ID[2] == 't' && wavHeader.Subchunk2ID[3] == 'a' )
           {
-//            QByteArray aux_byteArr_subChunk2_size(reinterpret_cast<const char *>(&wavHeader.Subchunk2Size), sizeof wavHeader.Subchunk2Size);
-
             buffer_u32_union_t aux_u32_subChunk2_size;
             aux_u32_subChunk2_size.dword = wavHeader.Subchunk2Size;
 
             AudioData = wavHeader.Subchunk2ID[0];
-            MSJ.append("$" + AudioData +
-                       wavHeader.Subchunk2ID[0] + wavHeader.Subchunk2ID[1] + wavHeader.Subchunk2ID[2] + wavHeader.Subchunk2ID[3] +
-                       aux_u32_subChunk2_size.array[0] + aux_u32_subChunk2_size.array[1] +
-                       aux_u32_subChunk2_size.array[2] + aux_u32_subChunk2_size.array[3] + "#" );
+            audio_data = wavHeader.Subchunk2ID[0];
 
-//            MSJ.append("$" + AudioData + wavHeader.Subchunk2ID[0] + wavHeader.Subchunk2ID[1] + wavHeader.Subchunk2ID[2] + wavHeader.Subchunk2ID[3]);
-//            MSJ.append(aux_byteArr_subChunk2_size);     // QByteArray::number( wavHeader.Subchunk2Size)
-//            MSJ.append("#");
+            message.append('$');
+            message.append(audio_data);
+            for (size_t i = 0; i < sizeof wavHeader.Subchunk2ID; ++i) {
+                message.append(wavHeader.Subchunk2ID[i]);
+            }
+            for (size_t i = 0; i < sizeof aux_u32_subChunk2_size.dword; ++i) {
+                message.append(aux_u32_subChunk2_size.array[i]);
+            }
+            message.append('#');
 
-            //Enviar(MSJ);
-            Enviar_v2(MSJ);
-            MSJ.clear();
+            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+            message.clear();
           }
 
         for (uint32_t i = 0; i < blockQty; i++) {
             /* --- Esta función va leyendo paquetes de archivo y los guarda en la estructura flePacket --- */
-            fileManager_SendWavDataInput(&filePacket, &p_file, fileName, fwLenght, blockQty, i, wavLenght);
+            fileManager_SendWavDataInput(&filePacket, &p_file, fileName, fileLenght, blockQty, 0/*i*/, wavHdrLenght);
             printf("OK");
+
             /* --- Acá debería tomar la estructura filePacket hacer el envío de la data --- */
             AudioData = wavHeader.Subchunk2ID[0];
+            AudioData = AudioData.toUpper();
 
-            for (uint32_t j = 0; j <= FILE_MAX_PACKET_SIZE; j++) {
-                Paquete.append(filePacket.dataPacket[j]);
+            audio_data = wavHeader.Subchunk2ID[0] - 0x20;
+
+            for (uint8_t j = 0; j < FILE_MAX_PACKET_SIZE; j++) {
+                package.append(filePacket.dataPacket[j]);
                 printf(" paquete[%d]: %x ",j,filePacket.dataPacket[j]);
             }
-            MSJ.append("$" + AudioData + filePacket.blockNumber + filePacket.endPacket + filePacket.lenDataPacket + Paquete + "#" );//Paquete + // filePacket.blockNumber + filePacket.endPacket + filePacket.lenDataPacket
-            Enviar(MSJ);
-            MSJ.clear();
-            Paquete.clear();
-        }
+
+            buffer_u16_union_t aux_u16_blockNumber;
+            aux_u16_blockNumber.word = i;   //filePacket.blockNumber;
+
+            message.append('$');
+            message.append(audio_data);
+            for (size_t i = 0; i < sizeof aux_u16_blockNumber.word; ++i) {
+                message.append(aux_u16_blockNumber.array[i]);
+            }
+            message.append(filePacket.endPacket);
+            message.append(filePacket.lenDataPacket);
+            message.append(package);
+            message.append('#');
+
+            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+            message.clear();
+            package.clear();
+         }
     }
 }
 
@@ -218,7 +251,7 @@ void MainWindow::GetWavHeader(FILE **p_file, const char fileName[], wav_hdr *p_w
     }
 }
 
-uint16_t MainWindow::fileManager_SendWavDataInput(SendFilePacket_t *p_SendFWData, FILE **p_file, const char fileName[], uint32_t fileLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t headerLength)
+uint16_t MainWindow::fileManager_SendWavDataInput(SendFilePacket_t *p_SendWavData, FILE **p_file, const char fileName[], uint32_t fileLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t headerLength)
 {
     uint16_t lastBlock = blockQty - 1;
     int i;
@@ -228,33 +261,33 @@ uint16_t MainWindow::fileManager_SendWavDataInput(SendFilePacket_t *p_SendFWData
 
         /* --- Verifico que el archivo se pueda abrir correctamente --- */
         if (*p_file) {
-            p_SendFWData->blockNumber = blockNumber;
-             printf(" blockNumber: %u\n",p_SendFWData->blockNumber);
+            p_SendWavData->blockNumber = blockNumber;
+             printf(" blockNumber: %u\n",p_SendWavData->blockNumber);
 
             if (blockNumber < lastBlock) {
-                p_SendFWData->endPacket = PACKETS_CONTINUE;
-                p_SendFWData->lenDataPacket = FILE_MAX_PACKET_SIZE;
-                printf(" Musica endPacket: %u\n",p_SendFWData->endPacket);
-                printf(" Musica lenDataPacket: %u\n",p_SendFWData->lenDataPacket);
+                p_SendWavData->endPacket = PACKETS_CONTINUE;
+                p_SendWavData->lenDataPacket = FILE_MAX_PACKET_SIZE;
+                printf(" Musica endPacket: %u\n",p_SendWavData->endPacket);
+                printf(" Musica lenDataPacket: %u\n",p_SendWavData->lenDataPacket);
             }
             else {
                 if (blockNumber == lastBlock) {
-                    p_SendFWData->endPacket = LAST_PACKET;
+                    p_SendWavData->endPacket = LAST_PACKET;
                     if (fileLenght % FILE_MAX_PACKET_SIZE) {
-                        p_SendFWData->lenDataPacket = fileLenght % FILE_MAX_PACKET_SIZE;
-                        printf(" Musica endPacket: %u\n",p_SendFWData->endPacket);
-                        printf(" Musica lenDataPacket: %u\n",p_SendFWData->lenDataPacket);
+                        p_SendWavData->lenDataPacket = fileLenght % FILE_MAX_PACKET_SIZE;
+                        printf(" Musica endPacket: %u\n",p_SendWavData->endPacket);
+                        printf(" Musica lenDataPacket: %u\n",p_SendWavData->lenDataPacket);
                     }
                     else {
-                        p_SendFWData->lenDataPacket = FILE_MAX_PACKET_SIZE;
-                        printf(" Musica endPacket: %u\n",p_SendFWData->endPacket);
-                        printf(" Musica lenDataPacket: %u\n",p_SendFWData->lenDataPacket);
+                        p_SendWavData->lenDataPacket = FILE_MAX_PACKET_SIZE;
+                        printf(" Musica endPacket: %u\n",p_SendWavData->endPacket);
+                        printf(" Musica lenDataPacket: %u\n",p_SendWavData->lenDataPacket);
                     }
                 }
             }
             if (*p_file) {
                 fseek(*p_file, (long)( headerLength + (blockNumber * FILE_MAX_PACKET_SIZE) ), SEEK_SET);
-                fread(p_SendFWData->dataPacket,sizeof *p_SendFWData->dataPacket, 1, *p_file);//fread(p_SendFWData->dataPacket,sizeof *p_SendFWData->dataPacket, p_SendFWData->lenDataPacket, *p_file);
+                fread(p_SendWavData->dataPacket,sizeof *p_SendWavData->dataPacket, 1, *p_file);//fread(p_SendFWData->dataPacket,sizeof *p_SendFWData->dataPacket, p_SendFWData->lenDataPacket, *p_file);
                 for ( i =0; i <= FILE_MAX_PACKET_SIZE ; i++) {
                     //printf(" Musica dataPacket: %u\n",p_SendFWData->dataPacket[i]);
                 }
@@ -269,7 +302,7 @@ uint16_t MainWindow::fileManager_SendWavDataInput(SendFilePacket_t *p_SendFWData
         }
     }
 
-    return (p_SendFWData->blockNumber);
+    return (p_SendWavData->blockNumber);
 }
 
 
@@ -286,6 +319,10 @@ void MainWindow::Enviar_v2(QByteArray &msj)
     port->write(msj);
 }
 
+void MainWindow::Enviar_v3(const char * msj, qint64 length)
+{
+    port->write(msj, length);
+}
 
 /*
  * wav_hdr wavHeader;

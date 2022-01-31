@@ -1,6 +1,0 @@
-/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_gpio.h:151:20:GPIO_PinWrite	24	static
-../drivers/PR_UART0.c:81:9:UART0_Pop_RX	16	static
-../drivers/PR_UART0.c:110:6:UART0_Push_TX	16	static
-../drivers/PR_UART0.c:136:6:UART0_Send_Data	24	static
-../drivers/PR_UART0.c:155:6:UART0_Analizar_Trama	16	static
-../drivers/PR_UART0.c:205:6:UART0_Analizar_Comando	24	static

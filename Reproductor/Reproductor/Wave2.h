@@ -16,11 +16,11 @@ typedef enum {
 /* Send Data -------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #pragma pack(push,1)
 typedef struct {
-    uint16_t dataLenght;								// Longitud del paquete de Data
-    uint16_t blockNumber;								// Número de bloque de datos de Firmware.
-    uint8_t endPacket;									// Indica si es el bloque final de envío del FW: 0x00 = Continúan mas paquetes, 0x01 = Último paquete
-    uint8_t lenDataPacket;								// Largo de datos del paquete. Máximo 128 bytes.
-    uint8_t dataPacket[FILE_MAX_PACKET_SIZE];           // Paquete de datos del FW.
+    uint16_t dataLenght;						// Longitud del paquete de Data
+    uint16_t blockNumber;						// Número de bloque de datos de WAV.
+    uint8_t endPacket;							// Indica si es el bloque final de envío datos WAV: 0x00 = Continúan mas paquetes, 0x01 = Último paquete
+    uint8_t lenDataPacket;						// Largo de datos del paquete. Máximo 128 bytes.
+    uint8_t dataPacket[FILE_MAX_PACKET_SIZE];   // Paquete de datos del archivo WAV.
 }SendFilePacket_t;
 
 typedef struct {

@@ -33,10 +33,11 @@ public:
     uint32_t fileManager_GetWavFileSize(FILE ** p_file, const char fileName[]);
     uint32_t fileManager_GetWavBlockQuantity(uint32_t fwLen);
     void GetWavHeader(FILE ** p_file, const char fileName[] ,wav_hdr *p_wavHeader);
-    uint16_t fileManager_SendWavDataInput(SendFilePacket_t * p_SendFWData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t wavLenght);
+    uint16_t fileManager_SendWavDataInput(SendFilePacket_t * p_SendWavData, FILE **p_file, const char fileName[], uint32_t fwLenght, uint32_t blockQty, uint32_t blockNumber, uint32_t wavLenght);
     //-----------
     void Enviar(QString);
     void Enviar_v2(QByteArray &msj);
+    void Enviar_v3(const char * msj, qint64 length);
 
     enum
     {

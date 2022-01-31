@@ -275,10 +275,12 @@ void MainWindow::ProcesarDatosRecibidos()
                     break;
             case RECIBO_MENSAJE_MSB:
 //                    ValorRecibido = (dato << 8);
+                    datosRecibidos.append(dato);
                     estadoRX = RECIBO_MENSAJE_LSB;
                     break;
             case RECIBO_MENSAJE_LSB:
 //                    ValorRecibido |= (dato);
+                    datosRecibidos.append(dato);
                     estadoRX = FIN_DE_TRAMA;
                     break;
             case FIN_DE_TRAMA:
@@ -292,6 +294,9 @@ void MainWindow::ProcesarDatosRecibidos()
 //                        QMessageBox::critical(this, "Error", " ERROR en la Trama ");
 
                     }
+
+                    estadoRX = ESPERO_MENSAJE;
+
                     break;
         default:  estadoRX = ESPERO_MENSAJE;
                     break;

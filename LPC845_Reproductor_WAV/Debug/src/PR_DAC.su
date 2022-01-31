@@ -1,0 +1,3 @@
+../src/PR_DAC.c:71:6:dac_init	16	static
+../src/PR_DAC.c:102:6:dac_update_value	16	static
+../src/PR_DAC.c:113:6:dac_config_ctrl	16	static

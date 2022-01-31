@@ -1,0 +1,2 @@
+../src/AP_Serial.c:150:6:Serial_Analizar_Trama_v2	24	static
+../src/AP_Serial.c:1181:6:Serial_Analizar_Comando	24	static

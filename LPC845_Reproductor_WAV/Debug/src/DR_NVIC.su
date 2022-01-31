@@ -1,0 +1,6 @@
+../src/DR_NVIC.c:65:6:NVIC_enable_interrupt	16	static
+../src/DR_NVIC.c:74:6:NVIC_disable_interrupt	16	static
+../src/DR_NVIC.c:83:6:NVIC_set_pending_interrupt	16	static
+../src/DR_NVIC.c:92:6:NVIC_clear_pending_interrupt	16	static
+../src/DR_NVIC.c:102:9:NVIC_get_active_interrupt	16	static
+../src/DR_NVIC.c:110:6:NVIC_set_irq_priority	24	static

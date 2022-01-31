@@ -1,0 +1,9 @@
+../src/DR_SYSTICK.c:64:6:SYSTICK_enable_count	8	static
+../src/DR_SYSTICK.c:72:6:SYSTICK_disable_count	8	static
+../src/DR_SYSTICK.c:80:6:SYSTICK_enable_interrupt	8	static
+../src/DR_SYSTICK.c:88:6:SYSTICK_disable_interrupt	8	static
+../src/DR_SYSTICK.c:97:6:SYSTICK_select_clock_source	16	static
+../src/DR_SYSTICK.c:106:9:SYSTICK_get_count_flag	8	static
+../src/DR_SYSTICK.c:114:10:SYSTICK_set_reload	24	static
+../src/DR_SYSTICK.c:130:6:SYSTICK_set_clear_current_value	8	static
+../src/DR_SYSTICK.c:138:10:SYSTICK_get_current_value	8	static

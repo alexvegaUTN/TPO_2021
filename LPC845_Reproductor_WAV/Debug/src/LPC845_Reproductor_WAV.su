@@ -1,0 +1,12 @@
+../src/LPC845_Reproductor_WAV.c:177:5:detect_endianness	64	static
+../src/LPC845_Reproductor_WAV.c:196:5:generate_test_data	32	static
+../src/LPC845_Reproductor_WAV.c:215:5:generate_test_data_v2	40	static
+../src/LPC845_Reproductor_WAV.c:234:5:main	8	static
+../src/LPC845_Reproductor_WAV.c:297:13:tick_callback	8	static
+../src/LPC845_Reproductor_WAV.c:316:13:usart0_rx_callback	16	static
+../src/LPC845_Reproductor_WAV.c:328:13:usart0_tx_callback	16	static
+../src/LPC845_Reproductor_WAV.c:346:13:usart1_rx_callback	16	static
+../src/LPC845_Reproductor_WAV.c:358:13:usart1_tx_callback	16	static
+../src/LPC845_Reproductor_WAV.c:372:13:spi_tx_callback	16	static
+../src/LPC845_Reproductor_WAV.c:386:13:spi_rx_callback	24	static
+../src/LPC845_Reproductor_WAV.c:395:6:timer_led_handler	16	static

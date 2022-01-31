@@ -1,0 +1,9 @@
+../src/PR_SYSTICK.c:72:6:systick_init	40	static
+../src/PR_SYSTICK.c:104:6:systick_update_callback	16	static
+../src/PR_SYSTICK.c:121:6:systick_inhibit_set	8	static
+../src/PR_SYSTICK.c:129:6:systick_inhibit_clear	8	static
+../src/PR_SYSTICK.c:137:6:SysTick_Handler	8	static
+../src/PR_SYSTICK.c:145:13:dummy_irq	8	static
+../src/PR_SYSTICK.c:150:6:systick_set_period_ms	16	static
+../src/PR_SYSTICK.c:155:10:systick_get_period_ms	8	static
+../src/PR_SYSTICK.c:160:10:systick_get_current_value	8	static

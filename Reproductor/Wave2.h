@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define FILE_MAX_PACKET_SIZE			128
+#define FILE_MAX_PACKET_SIZE			512
 
 /* --- Indica si es el bloque final de envío del FW --- */
 
@@ -13,13 +13,23 @@ typedef enum {
     LAST_PACKET = 0x01
 }SendFwEndPacket;
 
+/*enum
+{
+    __RRIF,
+    __FMT,
+    __DATA,
+    __BLOQUE,
+    __WEIT,
+};*/
+
+
 /* Send Data -------------------------------------------------------------------------------------------------------------------------------------------------------*/
 #pragma pack(push,1)
 typedef struct {
     uint16_t dataLenght;						// Longitud del paquete de Data
     uint16_t blockNumber;						// Número de bloque de datos de WAV.
     uint8_t endPacket;							// Indica si es el bloque final de envío datos WAV: 0x00 = Continúan mas paquetes, 0x01 = Último paquete
-    uint8_t lenDataPacket;						// Largo de datos del paquete. Máximo 128 bytes.
+    uint16_t lenDataPacket;						// Largo de datos del paquete. Máximo 512 bytes.
     uint8_t dataPacket[FILE_MAX_PACKET_SIZE];   // Paquete de datos del archivo WAV.
 }SendFilePacket_t;
 

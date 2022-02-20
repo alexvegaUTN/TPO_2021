@@ -24,161 +24,200 @@ void MainWindow::infoWav(QString paths)
     SendFilePacket_t filePacket;
 
     QByteArray path = paths.toLocal8Bit();
-    QByteArray Paquete;
-    QByteArray MSJ;
 
     QVector<uint8_t>package;
     QVector<uint8_t>message;
 
     char fileName[100];
     memcpy(fileName,path,sizeof (fileName));
-
     //const char fileName[] = "C:/Users/alexx/Documents/GitHub/TPO_2021/Reproductor/Reproductor/test.wav"; //C:\Users\alexx\Documents\GitHub\TPO_2021\Reproductor\Reproductor\test.wav
 
     /* Verifico existencia del archivo y que pueda ser abierto*/
     p_file = fileManager_GetWavFile(fileName);
 
-    if (p_file) {
-        /* Calculo longitud del Fw y la cantidad de bloques en que debe ser dividido */
-        fileLenght = fileManager_GetWavFileSize(&p_file, fileName);
-        wavHdrLenght = sizeof (wavHeader);
-        fileLenght = fileLenght - wavHdrLenght ;
-        blockQty = fileManager_GetWavBlockQuantity(fileLenght);
-        printf(" longitud del Fw: %d y la cantidad de bloques en que debe ser dividido: %d\n",fileLenght,blockQty);
+    /* Calculo longitud del Fw y la cantidad de bloques en que debe ser dividido */
+    fileLenght = fileManager_GetWavFileSize(&p_file, fileName);
+    wavHdrLenght = sizeof (wavHeader);
+    fileLenght = fileLenght - wavHdrLenght ;
+    blockQty = fileManager_GetWavBlockQuantity(fileLenght);
+    printf(" longitud del Fw: %d y la cantidad de bloques en que debe ser dividido: %d\n",fileLenght,blockQty);
 
+    if (p_file) {
+        //static unsigned int estado_infoWAV = __RRIF;
         /* Capturo el header cabecera del archivo wave*/
         GetWavHeader(&p_file, fileName,&wavHeader);
 
-        /* Verifico los datos y preparo los datos a enviar por el puerto */
-        if( wavHeader.RIFF[0] == 'R' && wavHeader.RIFF[1] == 'I' && wavHeader.RIFF[2] == 'F' && wavHeader.RIFF[3] == 'F' )
+        switch ( estado_infoWAV )
         {
-            buffer_u32_union_t aux_u32_chunkSize;
-            aux_u32_chunkSize.dword = wavHeader.ChunkSize;
+            case __RRIF:
 
-            audio_data = wavHeader.RIFF[0];
+                    /* Verifico los datos y preparo los datos a enviar por el puerto */
+                    if( wavHeader.RIFF[0] == 'R' && wavHeader.RIFF[1] == 'I' && wavHeader.RIFF[2] == 'F' && wavHeader.RIFF[3] == 'F' )
+                    {
+                        buffer_u32_union_t aux_u32_chunkSize;
+                        aux_u32_chunkSize.dword = wavHeader.ChunkSize;
+                        audio_data = wavHeader.RIFF[0];
 
-            message.append('$');
-            message.append(audio_data);
-            for (size_t i = 0; i < sizeof wavHeader.RIFF; ++i)
-                message.append(wavHeader.RIFF[i]);
-            for (size_t i = 0; i < sizeof aux_u32_chunkSize.dword; ++i)
-                message.append(aux_u32_chunkSize.array[i]);
-            for (size_t i = 0; i < sizeof wavHeader.WAVE; ++i)
-                message.append(wavHeader.WAVE[i]);
-            message.append('#');
+                        message.append('$');
+                        message.append(audio_data);
+                        for (size_t i = 0; i < sizeof wavHeader.RIFF; ++i)
+                            message.append(wavHeader.RIFF[i]);
+                        for (size_t i = 0; i < sizeof aux_u32_chunkSize.dword; ++i)
+                            message.append(aux_u32_chunkSize.array[i]);
+                        for (size_t i = 0; i < sizeof wavHeader.WAVE; ++i)
+                            message.append(wavHeader.WAVE[i]);
+                        message.append('#');
 
-            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
-            message.clear();
+                        Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+                        message.clear();
+                    }
+                    estado_infoWAV = __FMT;
+                    break;
+
+            case __FMT:
+
+                    if( wavHeader.fmt[0] == 'f' && wavHeader.fmt[1] == 'm' && wavHeader.fmt[2] == 't' )
+                    {
+                        buffer_u32_union_t aux_u32_subChunk1_size;
+                        buffer_u16_union_t aux_u16_audioFormat;
+                        buffer_u16_union_t aux_u16_numOfChan;
+                        buffer_u32_union_t aux_u32_samplesPerSec;
+                        buffer_u32_union_t aux_u32_bytesPerSec;
+                        buffer_u16_union_t aux_u16_blockAlign;
+                        buffer_u16_union_t aux_u16_bitsPerSmple;
+
+                        aux_u32_subChunk1_size.dword = wavHeader.Subchunk1Size;
+                        aux_u16_audioFormat.word = wavHeader.AudioFormat;
+                        aux_u16_numOfChan.word = wavHeader.NumOfChan;
+                        aux_u32_samplesPerSec.dword = wavHeader.SamplesPerSec;
+                        aux_u32_bytesPerSec.dword = wavHeader.bytesPerSec;
+                        aux_u16_blockAlign.word = wavHeader.blockAlign;
+                        aux_u16_bitsPerSmple.word = wavHeader.bitsPerSample;
+
+                        audio_data = wavHeader.fmt[0];
+
+                        message.append('$');
+                        message.append(audio_data);
+                        for (size_t i = 0; i < sizeof wavHeader.fmt; ++i) {
+                            message.append(wavHeader.fmt[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u32_subChunk1_size.dword; ++i) {
+                            message.append(aux_u32_subChunk1_size.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u16_audioFormat.word; ++i) {
+                            message.append(aux_u16_audioFormat.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u16_numOfChan.word; ++i) {
+                            message.append(aux_u16_numOfChan.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u32_samplesPerSec.dword; ++i) {
+                            message.append(aux_u32_samplesPerSec.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u32_bytesPerSec.dword; ++i) {
+                            message.append(aux_u32_bytesPerSec.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u16_blockAlign.word; ++i) {
+                            message.append(aux_u16_blockAlign.array[i]);
+                        }
+                        for (size_t i = 0; i < sizeof aux_u16_bitsPerSmple.word; ++i) {
+                            message.append(aux_u16_bitsPerSmple.array[i]);
+                        }
+                        message.append('#');
+
+                        Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+                        message.clear();
+                    }
+                    estado_infoWAV = __DATA;
+                    break;
+            case __DATA:
+
+                    if( wavHeader.Subchunk2ID[0] == 'd' && wavHeader.Subchunk2ID[1] == 'a' && wavHeader.Subchunk2ID[2] == 't' && wavHeader.Subchunk2ID[3] == 'a' )
+                    {
+                      buffer_u32_union_t aux_u32_subChunk2_size;
+                      aux_u32_subChunk2_size.dword = wavHeader.Subchunk2Size;
+
+                      AudioData = wavHeader.Subchunk2ID[0];
+                      audio_data = wavHeader.Subchunk2ID[0];
+
+                      message.append('$');
+                      message.append(audio_data);
+                      for (size_t i = 0; i < sizeof wavHeader.Subchunk2ID; ++i) {
+                          message.append(wavHeader.Subchunk2ID[i]);
+                      }
+                      for (size_t i = 0; i < sizeof aux_u32_subChunk2_size.dword; ++i) {
+                          message.append(aux_u32_subChunk2_size.array[i]);
+                      }
+                      message.append('#');
+
+                      Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+                      message.clear();
+                    }
+                    estado_infoWAV = __BLOQUE;
+                    break;
+            case __BLOQUE:
+                        //static uint32_t block_idx = 0;
+//                        if(block_idx < blockQty){             //for ( static uint32_t i = 0; i < blockQty; i++) {
+                        /* --- Esta función va leyendo paquetes de archivo y los guarda en la estructura flePacket --- */
+                        fileManager_SendWavDataInput(&filePacket, &p_file, fileName, fileLenght, blockQty, block_idx, wavHdrLenght);
+                        printf("OK");
+
+                        /* --- Acá debería tomar la estructura filePacket hacer el envío de la data --- */
+                        audio_data = wavHeader.Subchunk2ID[0] - 0x20;
+
+                        for (uint16_t j = 0; j < FILE_MAX_PACKET_SIZE; j++) {
+                            package.append(filePacket.dataPacket[j]);
+                            //printf(" paquete[%d]: %x ",j,filePacket.dataPacket[j]);
+                        }
+
+                        buffer_u16_union_t aux_u16_blockNumber;
+                        aux_u16_blockNumber.word = (uint16_t)block_idx;   //filePacket.blockNumber;
+
+                        buffer_u16_union_t aux_u16_lenDataPacket;
+                        aux_u16_lenDataPacket.word = FILE_MAX_PACKET_SIZE;   //filePacket.blockNumber;
+
+                        message.append('$');
+                        message.append(audio_data);
+                        for (size_t k = 0; k < sizeof aux_u16_blockNumber.word; ++k) {
+                            message.append(aux_u16_blockNumber.array[k]);
+                        }
+
+                        message.append(filePacket.endPacket);
+                        for (size_t k = 0; k < sizeof aux_u16_lenDataPacket.word; ++k) {
+                            message.append(aux_u16_lenDataPacket.array[k]);
+                        }
+
+                        message.append(package);
+                        message.append('#');
+
+                        Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
+
+                        //printf(" paquete[%d]",block_idx);
+
+                        message.clear();
+                        package.clear();
+
+                        estado_infoWAV = __BLOQUE;
+                        block_idx++;
+
+                        if( block_idx == blockQty )
+                        {
+                            block_idx = 0;
+                            estado_infoWAV = __ESPERA;
+                        }
+//                    }
+
+
+                    break;
+
+            case __ESPERA:
+
+                    break;
+
+            default:
+                        estado_infoWAV = __RRIF;
+                    break;
         }
 
-        if( wavHeader.fmt[0] == 'f' && wavHeader.fmt[1] == 'm' && wavHeader.fmt[2] == 't' )
-        {
-
-            buffer_u32_union_t aux_u32_subChunk1_size;
-            buffer_u16_union_t aux_u16_audioFormat;
-            buffer_u16_union_t aux_u16_numOfChan;
-            buffer_u32_union_t aux_u32_samplesPerSec;
-            buffer_u32_union_t aux_u32_bytesPerSec;
-            buffer_u16_union_t aux_u16_blockAlign;
-            buffer_u16_union_t aux_u16_bitsPerSmple;
-
-            aux_u32_subChunk1_size.dword = wavHeader.Subchunk1Size;
-            aux_u16_audioFormat.word = wavHeader.AudioFormat;
-            aux_u16_numOfChan.word = wavHeader.NumOfChan;
-            aux_u32_samplesPerSec.dword = wavHeader.SamplesPerSec;
-            aux_u32_bytesPerSec.dword = wavHeader.bytesPerSec;
-            aux_u16_blockAlign.word = wavHeader.blockAlign;
-            aux_u16_bitsPerSmple.word = wavHeader.bitsPerSample;
-
-            audio_data = wavHeader.fmt[0];
-
-            message.append('$');
-            message.append(audio_data);
-            for (size_t i = 0; i < sizeof wavHeader.fmt; ++i) {
-                message.append(wavHeader.fmt[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u32_subChunk1_size.dword; ++i) {
-                message.append(aux_u32_subChunk1_size.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u16_audioFormat.word; ++i) {
-                message.append(aux_u16_audioFormat.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u16_numOfChan.word; ++i) {
-                message.append(aux_u16_numOfChan.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u32_samplesPerSec.dword; ++i) {
-                message.append(aux_u32_samplesPerSec.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u32_bytesPerSec.dword; ++i) {
-                message.append(aux_u32_bytesPerSec.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u16_blockAlign.word; ++i) {
-                message.append(aux_u16_blockAlign.array[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u16_bitsPerSmple.word; ++i) {
-                message.append(aux_u16_bitsPerSmple.array[i]);
-            }
-            message.append('#');
-
-            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
-            message.clear();
-        }
-
-        if( wavHeader.Subchunk2ID[0] == 'd' && wavHeader.Subchunk2ID[1] == 'a' && wavHeader.Subchunk2ID[2] == 't' && wavHeader.Subchunk2ID[3] == 'a' )
-          {
-            buffer_u32_union_t aux_u32_subChunk2_size;
-            aux_u32_subChunk2_size.dword = wavHeader.Subchunk2Size;
-
-            AudioData = wavHeader.Subchunk2ID[0];
-            audio_data = wavHeader.Subchunk2ID[0];
-
-            message.append('$');
-            message.append(audio_data);
-            for (size_t i = 0; i < sizeof wavHeader.Subchunk2ID; ++i) {
-                message.append(wavHeader.Subchunk2ID[i]);
-            }
-            for (size_t i = 0; i < sizeof aux_u32_subChunk2_size.dword; ++i) {
-                message.append(aux_u32_subChunk2_size.array[i]);
-            }
-            message.append('#');
-
-            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
-            message.clear();
-          }
-
-        for (uint32_t i = 0; i < blockQty; i++) {
-            /* --- Esta función va leyendo paquetes de archivo y los guarda en la estructura flePacket --- */
-            fileManager_SendWavDataInput(&filePacket, &p_file, fileName, fileLenght, blockQty, 0/*i*/, wavHdrLenght);
-            printf("OK");
-
-            /* --- Acá debería tomar la estructura filePacket hacer el envío de la data --- */
-            AudioData = wavHeader.Subchunk2ID[0];
-            AudioData = AudioData.toUpper();
-
-            audio_data = wavHeader.Subchunk2ID[0] - 0x20;
-
-            for (uint8_t j = 0; j < FILE_MAX_PACKET_SIZE; j++) {
-                package.append(filePacket.dataPacket[j]);
-                printf(" paquete[%d]: %x ",j,filePacket.dataPacket[j]);
-            }
-
-            buffer_u16_union_t aux_u16_blockNumber;
-            aux_u16_blockNumber.word = i;   //filePacket.blockNumber;
-
-            message.append('$');
-            message.append(audio_data);
-            for (size_t i = 0; i < sizeof aux_u16_blockNumber.word; ++i) {
-                message.append(aux_u16_blockNumber.array[i]);
-            }
-            message.append(filePacket.endPacket);
-            message.append(filePacket.lenDataPacket);
-            message.append(package);
-            message.append('#');
-
-            Enviar_v3(reinterpret_cast<const char *>(message.data()), message.length());
-            message.clear();
-            package.clear();
-         }
     }
 }
 

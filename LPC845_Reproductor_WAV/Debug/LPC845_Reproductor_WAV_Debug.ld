@@ -6,7 +6,7 @@
  * Generated linker script file for LPC845
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.4.1 [Build 6260] [2021-09-15] on Jan 31, 2022, 12:13:06 AM
+ * MCUXpresso IDE v11.4.1 [Build 6260] [2021-09-15] on Feb 19, 2022, 11:37:27 PM
  */
 
 INCLUDE "LPC845_Reproductor_WAV_Debug_library.ld"

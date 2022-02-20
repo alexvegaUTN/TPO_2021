@@ -22,6 +22,7 @@
 #include "PR_Leds.h"
 #include "PR_Timer.h"
 #include "AP_Serial.h"
+#include "AP_MdE.h"
 
 
 /* --- SYSTICK -------------------------------------- */
@@ -31,12 +32,9 @@
 #define 	BLINK_TIME_MS		(500)
 
 /* --- USART ---------------------------------------- */
-/** Instancia de USART a utilizar */
-//#define		USART_DEBUG_INSTANCE			(0)
-//#define		USART_INTERFACE_INSTANCE		(1)
 /** Baudrate de USART a utilizar */
 #define		USART0_BAUDRATE		9600
-#define		USART1_BAUDRATE		9600 //115200
+#define		USART1_BAUDRATE		19200 //115200
 /** Puerto/pin en donde recibir datos por USART */
 #define		UART_RX_PORTPIN		GPIO_PORTPIN_0_24
 /** Puerto/pin en donde transmitir datos por USART */
@@ -44,7 +42,6 @@
 
 /** Instancia de SPI a utilizar */
 #define		SPI_INSTANCE		0
-
 /*  Puerto/pin de periferico SPI
  *
  *	v1: MOSI y MISO a través de pines sin conexión, cableados con wire wrap al CN4.
@@ -58,6 +55,12 @@
  *  MOSI_0 -- CN4_1  -- RX1     -- PIO0_17
  *  SCK_0  -- CN10_2 -- DIG_IN0 -- PIO0_04
  *  SSEL_0 -- CN10_3 -- DIG_IN1 -- PIO0_26
+ *
+ *  v3: LPC845-BRK montado en Protoboard.
+ *  MISO_0 -- PIN_22 -- PIO0_09
+ *  MOSI_0 -- PIN_21 -- PIO0_08
+ *  SCK_0  -- PIN_35 -- PIO0_04
+ *  SSEL_0 -- PIN_12 -- PIO0_26
  *
  *  En ambos casos, SCLK y SSEL son tomados desde CN10.
  *
@@ -81,20 +84,28 @@ typedef enum {
 
 typedef enum {
 	USART_DEBUG_INST = 0,
-	USART_INTERFACE_INST,
+	USART_INTERFACE_INST = 1,
 }usart_instances_en;
 
 /* Serial Debug */
 typedef enum {
-	USART0_RX_PORTPIN = GPIO_PORTPIN_0_24,		//GPIO_PORTPIN_0_17,
-	USART0_TX_PORTPIN = GPIO_PORTPIN_0_25,		//GPIO_PORTPIN_0_16,
+	USART0_RX_PORTPIN = GPIO_PORTPIN_0_17,//GPIO_PORTPIN_0_24,
+	USART0_TX_PORTPIN = GPIO_PORTPIN_0_16,//GPIO_PORTPIN_0_25,
 }usart0_port_pin_en;
 
 /* Serial Interface */
 typedef enum {
-	USART1_RX_PORTPIN = GPIO_PORTPIN_0_17,		//GPIO_PORTPIN_0_24,
-	USART1_TX_PORTPIN = GPIO_PORTPIN_0_16,		//GPIO_PORTPIN_0_25,
+	USART1_RX_PORTPIN = GPIO_PORTPIN_0_24,//GPIO_PORTPIN_0_17,
+	USART1_TX_PORTPIN = GPIO_PORTPIN_0_25,//GPIO_PORTPIN_0_16,
 }usart1_port_pin_en;
+
+// INICIALIZAR_SD
+// ANALIZAR_SERIAL_RX
+// ESCRIBIR_SD
+// RESPONDER_SERIAL_TX
+// LEER_SD
+
+
 
 static void tick_callback(void);
 static void usart0_rx_callback(void);
@@ -170,8 +181,8 @@ static const spi_master_mode_tx_config_t spi_tx_config =
 };
 
 card_type_en sd_type = CT_NOT_DEFINED;
+//uint8_t test_data[SD_DATA_SIZE];
 
-uint8_t test_data[SD_DATA_SIZE];
 
 // TODO: insert other definitions and declarations here
 int detect_endianness(void)
@@ -232,9 +243,8 @@ int generate_test_data_v2(uint8_t data[], uint32_t size)
 
 
 int main(void) {
-
     // TODO: insert code here
-	// Configuro el Main Clock como el FRO @30MHz
+	// Configuro como Main Clock el FRO @ 30MHz
 	syscon_fro_clock_config(kCLOCK_FroSrcFroOsc , kCLOCK_FroOscOut30M);
 	syscon_system_clock_set_source(kSYSCON_SYSTEM_CLOCK_SEL_FRO);
 
@@ -250,7 +260,7 @@ int main(void) {
 	Timer_Start(TIMER_LED_ID, BLINK_TIME_MS, MSEG, timer_led_handler);
 
 	// Inicialización de USART
-	usart_init(USART_DEBUG_INST, &usart0_config);
+	//usart_init(USART_DEBUG_INST, &usart0_config);
 	usart_init(USART_INTERFACE_INST, &usart1_config);
 
 	// Inicialización de SPI
@@ -260,7 +270,14 @@ int main(void) {
     //char message[] = "Testing Serial...\n\r";
     //usart_send_data(&usart_ctx[USART_INSTANCE], message, sizeof message - 1);
 
-    generate_test_data(test_data, SD_DATA_SIZE);
+    //generate_test_data(test_data, SD_DATA_SIZE);
+
+
+    // INICIALIZAR_SD
+    // ANALIZAR_SERIAL_RX
+    // ESCRIBIR_SD
+    // RESPONDER_SERIAL_TX
+    // LEER_SD
 
     // Enter an infinite loop, just incrementing a counter
     while(1) {
@@ -268,19 +285,27 @@ int main(void) {
         // stepping of tight while() loop
         __asm volatile ("nop");
 
-        if (sd_not_init)
+        MdE_State_Machine(USART_INTERFACE_INST, SPI_INSTANCE);
+
+/*        if (sd_not_init)
         	sd_type = sd_init_v2(SPI_INSTANCE);
         	//sd_type = sd_init(SPI_INSTANCE);
         else {
         	if (sd_write_flag) {
-        		sd_write_single_block(SPI_INSTANCE, 0x00, test_data, SD_DATA_SIZE);
+        		if (sd_write_single_block(SPI_INSTANCE, sd_wr_address, (uint8_t *)sd_wr_buffer, SD_DATA_SIZE) == SD_WRITE_BLOCK_FINISHED) {
+					sd_wr_address += SD_DATA_SIZE;
+
+					sd_write_flag_clear();
+				}
 			}
-        	/*if (sd_read_flag) {
+        	if (sd_read_flag) {
         		sd_read_single_block(SPI_INSTANCE, 0x00, test_data);
-			}*/
+			}
 
         	//Serial_Analizar_Trama_v2(USART_INTERFACE_INST);
         }
+
+        Serial_Analizar_Trama_v2(USART_INTERFACE_INST); */
 
         Timer_Event();
     }

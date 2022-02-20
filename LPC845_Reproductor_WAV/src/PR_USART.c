@@ -107,6 +107,12 @@ static void usart_handle_irq(uint8_t inst)
 	}
 }
 
+/**
+ * @brief Setear baudrate
+ * @param[in] inst Instancia a configurar
+ * @param[in] baudrate_Bps
+ * @param[in] srcClock_Hz
+ */
 static void usart_set_baudRate(uint8_t inst, uint32_t baudrate_Bps, uint32_t srcClock_Hz)
 {
 	uint32_t best_diff = (uint32_t)-1;
@@ -120,7 +126,6 @@ static void usart_set_baudRate(uint8_t inst, uint32_t baudrate_Bps, uint32_t src
 
 	for (osrval = best_osrval; osrval >= 8U; --osrval) {
 		brgval = (srcClock_Hz / ((osrval + 1) * baudrate_Bps)) - 1;
-		//brgval = (((srcClock_Hz * 10U) / ((osrval + 1U) * baudrate_Bps)) - 5U) / 10U;
 
 		if (brgval > 0xFFFFU) {
 			continue;
@@ -267,7 +272,9 @@ void usart_init(usart_sel_en inst, const usart_config_t * config)
 	USART_config_data_length(inst, config->data_length);
 	USART_config_parity(inst, config->parity);
 	USART_config_stop_bits(inst, config->stop_bits);
-	USART_set_BRGVAL(inst, aux);
+
+	//USART_set_BRGVAL(inst, aux);
+	usart_set_baudRate(inst, config->baudrate, syscon_peripheral_clock_get(inst));
 
 	// Las interrupciones de TX se habilitaran cuando se envie algun byte
 

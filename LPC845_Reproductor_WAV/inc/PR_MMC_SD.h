@@ -37,9 +37,6 @@
 
 #define MAX_TIMEOUT 0xFF
 
-//#define 	SPI_TX_BUFFER_SIZE			(512)
-//#define 	SPI_RX_BUFFER_SIZE			(512)
-
 #define	ENABLED							1
 #define	DISABLED						0
 #define	ENABLED_N						0
@@ -75,6 +72,15 @@ typedef enum {
 	CT_SDv2_HC_XC
 }card_type_en;
 
+typedef enum _sd_writing_state {
+	SD_WRITING_BLOCK = 0,
+	SD_WRITE_BLOCK_FINISHED = 1,
+}sd_writing_state_e;
+
+typedef enum _sd_reading_status {
+	SD_READ_OK = 0,
+	SD_READ_ERROR = 1,
+}sd_reading_status_e;
 
 /*
 #pragma pack(push, 1)
@@ -138,6 +144,12 @@ extern volatile uint8_t sd_not_init;
 extern volatile uint8_t sd_write_flag;
 extern volatile uint8_t sd_read_flag;
 
+extern volatile uint8_t sd_wr_buffer[];
+extern volatile uint32_t sd_wr_address;
+
+//extern volatile uint8_t sd_rd_buffer[];
+extern volatile uint32_t sd_rd_address;
+
 /***********************************************************************************************************************************
  *** PROTOTIPOS DE FUNCIONES GLOBALES
  **********************************************************************************************************************************/
@@ -157,8 +169,13 @@ void sd_send_command_v2(volatile spi_context_t ctx[], uint8_t command, uint32_t 
 void sd_send_dummy_bytes(volatile spi_context_t ctx[], uint32_t size, spi_ssel_enable_en ssel0_en, spi_rx_ignore_en rx_ignore);
 void sd_send_dummy_bytes_v2(volatile spi_context_t ctx[], uint32_t size, spi_ssel_enable_en ssel0_en, spi_eot_en eot, spi_rx_ignore_en rx_ignore);
 
-uint16_t sd_write_single_block(uint8_t spi_inst, uint32_t block_number, uint8_t data[], uint32_t size);
-uint16_t sd_read_single_block(uint8_t spi_inst, uint32_t block_number, uint8_t data_buffer[]);
+sd_writing_state_e sd_write_single_block(uint8_t spi_inst, uint32_t block_number, uint8_t data[], uint32_t size);
+void sd_write_flag_set(void);
+void sd_write_flag_clear(void);
+uint8_t sd_write_get_flag(void);
+
+uint8_t sd_read_single_block(uint8_t spi_inst, uint32_t block_number, uint8_t data_buffer[]);
+uint16_t sd_read_multiple_block(uint8_t spi_inst, uint32_t block_address, uint8_t block_count, uint8_t data_buffer[]);
 
 /* --- OLD ------------------ */
 uint8_t mmc_load_dummy_OLD(volatile spi_context_t ctx[], uint16_t size);

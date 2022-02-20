@@ -14,7 +14,9 @@ src/LPC845_Reproductor_WAV.o src/LPC845_Reproductor_WAV.d: \
  /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_Leds.h \
  /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_Timer.h \
  /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/DR_Timer.h \
- /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/AP_Serial.h
+ /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/AP_Serial.h \
+ /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/AP_MdE.h \
+ /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_USART.h
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_USART.h:
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_SYSCON.h:
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/DR_SYSCON.h:
@@ -30,3 +32,5 @@ src/LPC845_Reproductor_WAV.o src/LPC845_Reproductor_WAV.d: \
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_Timer.h:
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/DR_Timer.h:
 /home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/AP_Serial.h:
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/AP_MdE.h:
+/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Reproductor_WAV/inc/PR_USART.h:

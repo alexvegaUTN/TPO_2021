@@ -118,13 +118,6 @@
 #define STA_NODISK			0x02	/* No medium in the drive */
 #define STA_PROTECT			0x04	/* Write protected */
 
-/* Read / Write Data Tokens */
-#define SD_START_BLOCK_TOKEN_SINLE_READ   	(0xFE)
-#define SD_START_BLOCK_TOKEN_SINGLE_WRITE 	(0xFE)
-#define SD_START_BLOCK_TOKEN_MULTI_READ  	(0xFE)
-#define SD_START_BLOCK_TOKEN_MULTI_WRITE  	(0xFC)
-#define SD_STOP_TRAN_TOKEN 					(0xFD)
-
 #define SD_GENERIC_CRC16 					(0xFFFF)
 
 /***********************************************************************************************************************************
@@ -136,16 +129,16 @@
  **********************************************************************************************************************************/
 typedef enum sd_initialization_state
 {
-  SD_POWER_CYCLE = 0,
-  SD_SEND_CMD0,
-  SD_SEND_CMD8,
-  SD_SEND_CMD58,
-  SD_SEND_CMD55,
-  SD_SEND_ACMD41,
-  SD_SEND_CMD16,
-  SD_SEND_CMD1,
-  SD_SUCCESS,
-  SD_ERROR
+	SD_POWER_CYCLE = 0,
+	SD_SEND_CMD0,
+	SD_SEND_CMD8,
+	SD_SEND_CMD58,
+	SD_SEND_CMD55,
+  	SD_SEND_ACMD41,
+	SD_SEND_CMD16,
+	SD_SEND_CMD1,
+	SD_SUCCESS,
+	SD_ERROR
 }sd_init_phase_en;
 
 typedef enum
@@ -161,22 +154,66 @@ typedef enum
 {
 	SD_CMD17_SEND = 0,
 	SD_CMD17_RESP,
+}sd_single_read_states_e;
 
- }sd_single_read_states_e;
-
- typedef enum
- {
+typedef enum
+{
  	SD_CMD18_SEND = 0,
  	SD_CMD18_RESP,
 	SD_READ_MULTI_PACKETS,
+}sd_multi_read_states_e;
 
-  }sd_multi_read_states_e;
+/* Results of Disk Functions */
+typedef enum {
+	SD_RES_OK = 0,		/* 0: Successful */
+	SD_RES_ERROR,		/* 1: R/W Error */
+	SD_RES_WRPRT,		/* 2: Write Protected */
+	SD_ES_NOTRDY,		/* 3: Not Ready */
+	SD_RES_PARERR		/* 4: Invalid Parameter */
+} sd_result;
+
+/*! @brief Error bit in SPI mode R1 */
+typedef enum _sdspi_r1_error_status_flag
+{
+	SD_R1_NotError				= 0,				/*!< R1 response OK */
+	SD_R1_InIdleState 			= (1U << 0U),       /*!< In idle state */
+    SD_R1_EraseReset 			= (1U << 1U),       /*!< Erase reset */
+    SD_R1_IllegalCommand 		= (1U << 2U),     	/*!< Illegal command */
+    SD_R1_CommandCrcError 		= (1U << 3U),    	/*!< Com crc error */
+    SD_R1_EraseSequenceError 	= (1U << 4U), 		/*!< Erase sequence error */
+    SD_R1_AddressError 			= (1U << 5U),       /*!< Address error */
+    SD_R1_ParameterError 		= (1U << 6U),     	/*!< Parameter error */
+}sd_r1_error_status_flag_e;
+
+/*! @brief Error bit in SPI mode R2 */
+typedef enum _sd_r2_error_status_flag
+{
+	SD_R2_CardLocked 			= (1U << 0U),       /*!< Card is locked */
+    SD_R2_WriteProtectEraseSkip = (1U << 1U),     	/*!< Write protect erase skip */
+    SD_R2_LockUnlockFailed 		= (1U << 1U),       /*!< Lock/unlock command failed */
+    SD_R2_Error 				= (1U << 2U),       /*!< Unknown error */
+    SD_R2_CardControllerError 	= (1U << 3U),   	/*!< Card controller error */
+    SD_R2_CardEccFailed 		= (1U << 4U),       /*!< Card ecc failed */
+    SD_R2_WriteProtectViolation = (1U << 5U), 		/*!< Write protect violation */
+    SD_R2_EraseParameterError 	= (1U << 6U),   	/*!< Erase parameter error */
+    SD_R2_OutOfRange 			= (1U << 7U),    	/*!< Out of range */
+    SD_R2_CsdOverwrite 			= (1U << 7U),       /*!< CSD overwrite */
+  }sd_r2_error_status_flag_e;
+
+
+/*! @brief Read / Write Data Tokens */
+typedef enum _sdspi_data_token
+{
+	SD_START_BLOCK_TOKEN_SINLE_READ 	= 0xFEU,        /*!< Single block read, multiple block read */
+	SD_START_BLOCK_TOKEN_SINGLE_WRITE 	= 0xFEU,   		/*!< Single block write */
+	SD_START_BLOCK_TOKEN_MULTI_READ 	= 0xFEU,		/*!< Multiple block read */
+	SD_START_BLOCK_TOKEN_MULTI_WRITE 	= 0xFCU, 		/*!< Multiple block write */
+	SD_STOP_TRAN_TOKEN 					= 0xFDU,       	/*!< Stop transmission */
+}sd_data_token_e;
 
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO - Estructuras
  **********************************************************************************************************************************/
-/* Status of Disk Functions */
-typedef uint8_t	DSTATUS;
 
 /* resguardo alineacion asignada por el compilador y seteo alineacion de estructuras sin padding,
  * de modo tal que el tamaño de sd_command_struct_t coincida exactamente con MMC_CMD_SIZE */
@@ -269,7 +306,6 @@ typedef struct
 	uint8_t wp_violation : 1;
 	uint8_t erase_param : 1;
 	uint8_t out_of_range_or_csd_overwr : 1;
-
 	R1_response_union_t r1;
 }R2_response_str_t;
 
@@ -340,27 +376,14 @@ typedef struct
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
-/*volatile spi_master_mode_tx_data_t spi_tx_buff[SPI_TX_BUFFER_SIZE + 1];
-
-volatile uint16_t spi_txInput = 0;
-volatile uint16_t spi_txOutput = 0;
-
-volatile uint8_t spi_rx_buff[100];
-volatile uint32_t spi_rxInput = 0;
-volatile uint32_t spi_rxOutput = 0;
-
-volatile uint8_t spi_rx_complete_flag = 0;
-volatile uint8_t spi_tx_flag = 0;*/
-
-//static char comando[6];
-//static char buffer[512];
-//static uint32_t i = 0;
 
 /* SD not initialized flag TRUE */
 volatile uint8_t sd_not_init = 1;
 /* SD test write flag */
-volatile uint8_t sd_write_flag = 1;
-volatile uint8_t sd_read_flag = 1;
+volatile uint8_t sd_write_flag = 0;
+volatile uint8_t sd_read_flag = 0;
+
+static volatile uint8_t sd_write_block_flag = 0;
 
 volatile uint8_t MMCWRData[SD_DATA_SIZE];
 volatile uint8_t MMCRDData[SD_DATA_SIZE];
@@ -368,6 +391,12 @@ volatile uint8_t MMCCmd[SD_CMD_SIZE];
 volatile uint16_t delay_mmc = 0;
 
 volatile uint8_t MMCStatus = 0;
+
+volatile uint8_t sd_wr_buffer[SD_DATA_SIZE];
+volatile uint32_t sd_wr_address = 0x00;
+
+//volatile uint8_t sd_rd_buffer[SD_DATA_SIZE];
+volatile uint32_t sd_rd_address = 0x00;
 
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
@@ -405,8 +434,6 @@ static volatile R7_response_union_t r7 = {
 static volatile uint16_t dato_rx;
 
 static volatile card_type_en card_type = CT_NOT_DEFINED;
-
-static volatile DSTATUS stat = STA_NOINIT;	/* Disk status */
 
 
 /***********************************************************************************************************************************
@@ -865,7 +892,7 @@ uint8_t sd_send_op_cond(volatile spi_context_t * spi_ctx, volatile R1_response_u
 		if (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_STOP)
 			Timer_Start(TIMER_SD_INIT_ID, 1000, MSEG, timer_sd_init_handler);
 
-		/* Set 10ms timer for spacing retrying CMD55-ACMD41 commands */
+		/* Set 15ms timer for spacing retrying CMD55-ACMD41 commands */
 		if (Timer_Activity_Get(TIMER_SD_CMD41_ID) == kTIMER_STOP)
 			Timer_Start(TIMER_SD_CMD41_ID, 15, MSEG, timer_sd_cmd41_handler);
 
@@ -1088,7 +1115,7 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			/* GO_IDLE_STATE: resets SD card */
 			sd_go_idle_state(&spi_ctx[spi_inst], &r1);
 
-			if (r1.byte == 0x01)
+			if (r1.byte == SD_R1_InIdleState)
 				estado_sd = SD_SEND_CMD8;
 
 			break;
@@ -1097,7 +1124,7 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			/* SEND_IF_COND: sends interface conditions */
 			sd_send_interface_condition(&spi_ctx[spi_inst], &r7);
 
-			if ((r7.str.r1.byte == 0x01) && r7.str.interf_cond.dword == 0x000001AA) {
+			if ((r7.str.r1.byte == SD_R1_InIdleState) && r7.str.interf_cond.dword == 0x000001AA) {
 				/* If we arrive to this point -> SD v2.00 or later */
 				card_type = CT_SDv2;
 
@@ -1105,7 +1132,8 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			}
 
 			/* If returns illegal command or CRC error -> SD v1.x */
-			if ((r7.str.r1.byte == 0x05) || (r7.str.r1.byte == 0x09)) {
+			if ((r7.str.r1.byte == (SD_R1_InIdleState | SD_R1_IllegalCommand)) ||
+				(r7.str.r1.byte == (SD_R1_InIdleState | SD_R1_CommandCrcError))) {
 				card_type = CT_SDv1;
 
 				estado_sd = SD_SEND_CMD58;
@@ -1124,21 +1152,21 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			if (sd_cmd58_pass1 == 0) {
 				/* if r7.array[1] == 0x00 -> pwrup_status = 0, CCS = 0 -> pwrup not finished, SD v2.00, SDSC
 				 * if r7.array[1] == 0x40 -> pwrup_status = 0, CCS = 1 -> pwrup not finished, SD v2.00, SDHC o SDXC */
-				if ((r3.str.r1.byte == 0x01) && ((r3.str.ocr.dword == 0x00FF8000) || (r3.str.ocr.dword == 0x40FF8000))) {
+				if ((r3.str.r1.byte == SD_R1_InIdleState) && ((r3.str.ocr.dword == 0x00FF8000) || (r3.str.ocr.dword == 0x40FF8000))) {
 					/* If we arrive to this point -> SD operates between 2v7 and 3v6 */
 					sd_cmd58_pass1 = 1;
 
 					estado_sd = SD_SEND_CMD55;
 				}
 			} else if ((sd_cmd58_pass1 == 1) &&(sd_cmd58_pass2 == 0) && (card_type == CT_SDv2 )) {
-				if ((r3.str.r1.byte == 0x00) && (r3.str.ocr.dword == 0x80FF8000)) {
+				if ((r3.str.r1.byte == SD_R1_NotError) && (r3.str.ocr.dword == 0x80FF8000)) {
 					sd_cmd58_pass2 = 1;
 					/* If we arrive to this point: CCS = 0 -> SD v2.00 or Later, SDSC */
 					card_type = CT_SDv2_SC;
 
 					estado_sd = SD_SEND_CMD16;
 				}
-				else if ((r3.str.r1.byte == 0x00) && (r3.str.ocr.dword == 0xC0FF8000)) {
+				else if ((r3.str.r1.byte == SD_R1_NotError) && (r3.str.ocr.dword == 0xC0FF8000)) {
 					sd_cmd58_pass2 = 1;
 					/* If we arrive to this point: CCS = 1 -> SD v2.00 or Later, SDHC or SDXC */
 					card_type = CT_SDv2_HC_XC;
@@ -1170,7 +1198,9 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 //			if (Timer_Activity_Get(TIMER_SD_CMD41_ID) == kTIMER_STOP)
 //				Timer_Start(TIMER_SD_CMD41_ID, 10, MSEG, timer_sd_cmd41_handler);
 
-			if ((r1.byte == 0x05) || (r1.byte == 0x09) || (sd_acmd41_timeout == 1)) {
+			if ((r1.byte == (SD_R1_InIdleState | SD_R1_IllegalCommand))  ||
+				(r1.byte == (SD_R1_InIdleState | SD_R1_CommandCrcError)) ||
+				(sd_acmd41_timeout == 1)) {
 				if (card_type == CT_SDv2) {
 					/* unknown Card */
 					card_type = CT_NOT_DEFINED;
@@ -1185,7 +1215,7 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 				}
 			}
 
-			if ((r1.byte == 0x01) && (sd_acmd41_retry == 1) && (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_RUN)) {
+			if ((r1.byte == SD_R1_InIdleState) && (sd_acmd41_retry == 1) && (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_RUN)) {
 				/* SD not Initialiazed -> Retry */
 				sd_acmd41_flag = 0;
 				sd_cmd55_flag = 0;
@@ -1194,7 +1224,7 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 				estado_sd = SD_SEND_CMD55;
 			}
 
-			if ((r1.byte == 0x00) && (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_RUN)) {
+			if ((r1.byte == SD_R1_NotError) && (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_RUN)) {
 				Timer_Stop(TIMER_SD_INIT_ID);
 				Timer_Stop(TIMER_SD_CMD41_ID);
 
@@ -1211,7 +1241,7 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			 * If card is SDHC or SDXC, block length is fixed to 512 bytes */
 			sd_set_blocklen(&spi_ctx[spi_inst], &r1);
 
-			if (r1.byte == 0x00) {
+			if (r1.byte == SD_R1_NotError) {
 				estado_sd = SD_SUCCESS;
 			}
 
@@ -1225,7 +1255,9 @@ card_type_en sd_init_v2(uint8_t spi_inst)
 			if (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_STOP)
 				Timer_Start(TIMER_SD_INIT_ID, 1000, MSEG, timer_sd_init_handler);
 
-			if ((r1.byte == 0x05) || (r1.byte == 0x09) || (Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_STOP)) {
+			if ((r1.byte == (SD_R1_InIdleState | SD_R1_IllegalCommand))  ||
+				(r1.byte == (SD_R1_InIdleState | SD_R1_CommandCrcError)) ||
+				(Timer_Activity_Get(TIMER_SD_INIT_ID) == kTIMER_STOP)) {
 				/* Unknown Card */
 				card_type = CT_NOT_DEFINED;
 
@@ -1675,11 +1707,12 @@ void sd_send_data_packet(volatile spi_context_t ctx[], const uint8_t data[], con
  *
  ***********************************************************************/
 
-uint16_t sd_write_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t data[], uint32_t size)
+sd_writing_state_e sd_write_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t data[], uint32_t size)
 {
 	static R1_response_union_t r1 = { .byte = 0x80, };
 	static Data_resp_token_union_t data_resp_token = { .byte = 0x00 };
 	static sd_single_write_states_e wr_states = SD_CMD24_SEND;
+	sd_writing_state_e val = 0;
 
 	if (wr_states == SD_CMD24_SEND) {
 		/* Send CMD24(WRITE_SINGLE_BLOCK) to write data to SD card */
@@ -1694,7 +1727,7 @@ uint16_t sd_write_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t
 
 	if (wr_states == SD_SEND_PACKET) {
 		sd_send_data_packet(&spi_ctx[spi_inst], data, size);
-		sd_send_dummy_bytes(&spi_ctx[spi_inst], 20, kSPI_SSEL0_ENABLED, kSPI_RX_NOT_IGNORE);
+		sd_send_dummy_bytes(&spi_ctx[spi_inst], 200, kSPI_SSEL0_ENABLED, kSPI_RX_NOT_IGNORE);
 
 		wr_states = SD_PACKET_RESP;
 	}
@@ -1707,14 +1740,29 @@ uint16_t sd_write_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t
 	/* Check if SD is busy -> is writing the data */
 	if (wr_states == SD_WRITING_BUSY) {
 		if (sd_check_busy_state() == 0) {
-			sd_write_flag = 0;
+			sd_write_flag_clear();
+			val = SD_WRITE_BLOCK_FINISHED;
 			wr_states = SD_CMD24_SEND;
 		}
 	}
 
-	return 1;
+	return val;
 }
 
+void sd_write_flag_set(void)
+{
+	sd_write_flag = 1;
+}
+
+void sd_write_flag_clear(void)
+{
+	sd_write_flag = 0;
+}
+
+uint8_t sd_write_get_flag(void)
+{
+	return sd_write_flag;
+}
 
 /************************** SD Read Block ****************************/
 /*
@@ -1725,8 +1773,9 @@ uint16_t sd_write_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t
  *
  **********************************************************************/
 
-uint16_t sd_read_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t data_buffer[])
+uint8_t sd_read_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t data_buffer[])
 {
+	uint8_t ret = 0xFF;
 	static R1_response_union_t r1 = { .byte = 0x80, };
 	static sd_single_read_states_e rd_states = SD_CMD17_SEND;
 
@@ -1742,11 +1791,12 @@ uint16_t sd_read_single_block(uint8_t spi_inst, uint32_t block_address, uint8_t 
 			sd_send_dummy_bytes_v2(&spi_ctx[spi_inst], 520, kSPI_SSEL0_ENABLED, kSPI_NOT_EOT, kSPI_RX_IGNORE);
 
 			rd_states = SD_CMD17_SEND;
+			ret = SD_R1_NotError;
 			sd_read_flag = 0;
 		}
 	}
 
-	return 0;
+	return ret;
 }
 
 uint16_t sd_read_multiple_block(uint8_t spi_inst, uint32_t block_address, uint8_t block_count, uint8_t data_buffer[])

@@ -1,2 +1,4 @@
-../src/AP_Serial.c:150:6:Serial_Analizar_Trama_v2	24	static
-../src/AP_Serial.c:1181:6:Serial_Analizar_Comando	24	static
+../src/AP_Serial.c:193:6:Serial_Analizar_Trama_v2	24	static
+../src/AP_Serial.c:635:6:Serial_Send_Confirmation	24	static
+../src/AP_Serial.c:666:16:Serial_Analizar_Comando	32	static
+../src/AP_Serial.c:702:8:Serial_Load_SD_Buffer	32	static

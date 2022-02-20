@@ -7,6 +7,7 @@ S_SRCS += \
 ../src/aeabi_romdiv_patch.s 
 
 C_SRCS += \
+../src/AP_MdE.c \
 ../src/AP_Serial.c \
 ../src/DR_DAC.c \
 ../src/DR_GPIO.c \
@@ -35,6 +36,7 @@ C_SRCS += \
 ../src/mtb.c 
 
 OBJS += \
+./src/AP_MdE.o \
 ./src/AP_Serial.o \
 ./src/DR_DAC.o \
 ./src/DR_GPIO.o \
@@ -64,6 +66,7 @@ OBJS += \
 ./src/mtb.o 
 
 C_DEPS += \
+./src/AP_MdE.d \
 ./src/AP_Serial.d \
 ./src/DR_DAC.d \
 ./src/DR_GPIO.d \

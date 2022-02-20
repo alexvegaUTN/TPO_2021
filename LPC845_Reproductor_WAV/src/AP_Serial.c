@@ -23,8 +23,9 @@
 #define		START_BYTE				('$')
 #define		STOP_BYTE				('#')
 
-#define		LONG_MAX_CMD			(32)
-#define 	FILE_MAX_PACKET_SIZE	(128)
+
+#define		LONG_MAX_RESP			(16)
+
 
 #define size_riff 		4
 #define size_wave		4
@@ -49,32 +50,47 @@ typedef enum
 	true
 }flag_state_e;
 
+typedef enum _estados_UART0 {
+	BYTE_START = 0,
+	TIPO,
+	AUDIO_DATA,
+	COMANDO,
+	BYTE_STOP
+} estados_UART0_e;
+
+typedef enum _estados_riff{
+	__ChunkID = 0,
+	__ChunkSize,
+	__Format
+}estados_riff_t;
+
+typedef enum _estados_fmt {
+	__Subchunk1ID = 0,
+	__Subchunk1Size,
+	__AudioFormat,
+	__NumOfChan,
+	__SamplesPerSec,
+	__bytesPerSec,
+	__blockAlign,
+	__bitsPerSample
+} estados_fmt_t;
+
+typedef enum _estados_data {
+	__Subchunk2ID = 0,
+	__Subchunk2Size,
+} estados_data_t;
+
+typedef enum _estados_file_packet {
+	__blockNumber = 0,
+	__endPacket,
+	__lenDataPacket,
+	__Packet,
+}estados_file_packet_t;
+
+
 /***********************************************************************************************************************************
  *** TIPOS DE DATOS PRIVADOS AL MODULO - Estructuras
  **********************************************************************************************************************************/
-typedef struct
-{
-	char * cmd_play;
-	char * cmd_pause;
-	char * cmd_stop;
-}commands_rx_t;
-
-typedef struct
-{
-	char * resp_play;
-	char * resp_pause;
-	char * resp_stop;
-}response_tx_t;
-
-typedef union{
-	uint8_t array[sizeof(uint32_t)];
-	uint32_t dword;
-}buffer_uint32_union_t;
-
-typedef union{
-	uint8_t array[sizeof(uint16_t)];
-	uint16_t word;
-}buffer_uint16_union_t;
 
 //*****ACA DEFINIR STRUCT FMT Y RIFF PARA PODER GUARDAR LOS DATOS QUE ME LLEGAN, EN LA MAQUINA ESTADOS,
 //*****TAMBIEN SUBCHUNK2DSIZE, ETC........*******
@@ -99,31 +115,58 @@ typedef struct WAV_HEADER
     uint32_t        Subchunk2Size;  // Sampled data length
 } wav_hdr_t;
 
-typedef struct {
-    uint16_t 	dataLenght;								// Longitud del paquete de Data
-    uint16_t 	blockNumber;							// Número de bloque de datos de Firmware.
-    uint8_t 	endPacket;								// Indica si es el bloque final de envío del FW: 0x00 = Continúan mas paquetes, 0x01 = Último paquete
-    uint8_t 	lenDataPacket;							// Largo de datos del paquete. Máximo 128 bytes.
-    uint8_t 	dataPacket[FILE_MAX_PACKET_SIZE];       // Paquete de datos del archivo WAV.
-}send_file_packet_t;
-
 /****************IMPORTANT**********************************************************************************
- * ----> The length of strings RIFF,WAVE,fmt and SubCHunk2ID is 5 because needs null in the final of himself */
+ * ----> The length of strings RIFF, WAVE, fmt and data is 5 because needs null in the final position */
+
+typedef struct
+{
+	char cmd_play[LONG_MAX_CMD];
+	char cmd_pause[LONG_MAX_CMD];
+	char cmd_stop[LONG_MAX_CMD];
+}commands_rx_t;
+
+typedef struct
+{
+	char resp_play[LONG_MAX_RESP];
+	char resp_pause[LONG_MAX_RESP];
+	char resp_stop[LONG_MAX_RESP];
+}response_cmd_tx_t;
+
+typedef struct
+{
+	char resp_RIFF[LONG_MAX_RESP];
+	char resp_fmt_subchunk[LONG_MAX_RESP];
+	char resp_data_subchunk[LONG_MAX_RESP];
+	char resp_DATA[LONG_MAX_RESP];
+}response_packet_t;
+
+
+typedef union{
+	uint8_t array[sizeof(uint32_t)];
+	uint32_t dword;
+}buffer_uint32_union_t;
+
+typedef union{
+	uint8_t array[sizeof(uint16_t)];
+	uint16_t word;
+}buffer_uint16_union_t;
 
 
 /***********************************************************************************************************************************
  *** TABLAS PRIVADAS AL MODULO
  **********************************************************************************************************************************/
 
+
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PUBLICAS
  **********************************************************************************************************************************/
+volatile send_file_packet_t file_packet;
 
 /***********************************************************************************************************************************
  *** VARIABLES GLOBALES PRIVADAS AL MODULO
  **********************************************************************************************************************************/
-wav_hdr_t WAV_FILE;
-send_file_packet_t file_packet;
+static volatile wav_hdr_t WAV_FILE;
+
 
 /***********************************************************************************************************************************
  *** PROTOTIPO DE FUNCIONES PRIVADAS AL MODULO
@@ -147,54 +190,8 @@ send_file_packet_t file_packet;
 */
 
 
-void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
+void Serial_Analizar_Trama_v2(const uint8_t usart_instance, serial_data_descriptor_t * serial_data_desc)
 {
-	typedef enum _estados_UART0 {
-		BYTE_START = 0,
-		TIPO,
-		AUDIO_DATA,
-		COMANDO,
-		BYTE_STOP
-	} estados_UART0_e;
-
-	typedef enum _packet_types {
-		__notDefined = 0,
-		__RIFF = 'R',
-		__fmtSubchunk = 'f',
-		__dataSubchunk = 'd',
-		__DATA = 'D',
-		__command = 'C'
-	}packet_types_t;
-
-	typedef enum _estados_riff{
-		__ChunkID = 0,
-		__ChunkSize,
-		__Format
-	}estados_riff_t;
-
-	typedef enum _estados_fmt {
-		__Subchunk1ID = 0,
-		__Subchunk1Size,
-		__AudioFormat,
-		__NumOfChan,
-		__SamplesPerSec,
-		__bytesPerSec,
-		__blockAlign,
-		__bitsPerSample
-	} estados_fmt_t;
-
-	typedef enum _estados_data {
-		__Subchunk2ID = 0,
-		__Subchunk2Size,
-	} estados_data_t;
-
-	typedef enum _estados_file_packet {
-		__blockNumber = 0,
-		__endPacket,
-		__lenDataPacket,
-		__Packet,
-	}estados_file_packet_t;
-
 	static const uint8_t dbg_inst = 0;
 
 	static estados_UART0_e estado = BYTE_START;
@@ -210,76 +207,55 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 	static buffer_uint32_union_t aux_uint32;
 	static buffer_uint16_union_t aux_uint16;
 
-	static uint8_t dbg_buffer[136];
-	static uint8_t idx = 0;
+	//static uint8_t dbg_buffer[136];
+	//static uint8_t idx = 0;
 
 	int32_t dato_rx = usart_pop_RX(&usart_ctx[usart_instance]);
 
 	if (dato_rx < 0)
-		return;
-
-	dato_rx = (uint8_t)dato_rx;
+		return 0;
 
 	switch (estado) {
 		case BYTE_START:
 			if (dato_rx == START_BYTE) {
-				dbg_buffer[idx++] = (uint8_t)dato_rx;
-
-				static uint8_t a = 0;
-
-				if (a == 0) {
-					__asm volatile ("nop");		// RIFF
-					a++;
-				}
-				if (a == 1) {
-					__asm volatile ("nop");		// fmt
-					a++;
-				}
-				if (a == 2) {
-					__asm volatile ("nop");		// dataSubChunk2
-					a++;
-				}
-				if (a == 3) {
-					__asm volatile ("nop");		// DATA
-					a = 0;
-				}
-
+				//dbg_buffer[idx++] = (uint8_t)dato_rx;
 
 				estado = TIPO;
 			}
 			break;
 
 		case TIPO:
-			if (dato_rx == 'R' || dato_rx == 'f' || dato_rx == 'd' || dato_rx == 'D' || dato_rx == 'C') {
+			if (dato_rx == 'R'  || dato_rx == 'f'  || dato_rx == 'd'	|| dato_rx == 'D' 	|| dato_rx == 'C') {
 
 				switch (dato_rx) {
 
 					case __RIFF:
-						packet_type = __RIFF;
-						dbg_buffer[idx++] = (uint8_t)dato_rx;
+						serial_data_desc->pckt_type = packet_type = __RIFF;
+						//dbg_buffer[idx++] = (uint8_t)dato_rx;
 						estado = AUDIO_DATA;
 						break;
 
 					case __fmtSubchunk:
-						packet_type = __fmtSubchunk;
-						dbg_buffer[idx++] = (uint8_t)dato_rx;
+						serial_data_desc->pckt_type = packet_type = __fmtSubchunk;
+						//dbg_buffer[idx++] = (uint8_t)dato_rx;
 						estado = AUDIO_DATA;
 						break;
 
 					case __dataSubchunk:
-						packet_type = __dataSubchunk;
-						dbg_buffer[idx++] = (uint8_t)dato_rx;
+						serial_data_desc->pckt_type = packet_type = __dataSubchunk;
+						//dbg_buffer[idx++] = (uint8_t)dato_rx;
 						estado = AUDIO_DATA;
 						break;
 
-					case __DATA:
-						packet_type = __DATA;
-						dbg_buffer[idx++] = (uint8_t)dato_rx;
+					case __DATA_BLK:
+						serial_data_desc->pckt_type = packet_type = __DATA_BLK;
+						//dbg_buffer[idx++] = (uint8_t)dato_rx;
 						estado = AUDIO_DATA;
 						break;
 
-					case __command:
-						dbg_buffer[idx++] = (uint8_t)dato_rx;
+					case __COMMAND:
+						serial_data_desc->pckt_type = packet_type = __COMMAND;
+						//dbg_buffer[idx++] = (uint8_t)dato_rx;
 						estado = COMANDO;
 						break;
 
@@ -305,8 +281,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 								if (i == size_riff) {
 									WAV_FILE.RIFF[i] = '\0';
-									memcpy(&dbg_buffer[idx], WAV_FILE.RIFF, size_riff);
-									idx += size_riff;
+									//memcpy(&dbg_buffer[idx], WAV_FILE.RIFF, size_riff);
+									//idx += size_riff;
 									i = 0;
 
 									estado_riff = __ChunkSize;
@@ -320,8 +296,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.ChunkSize) {
 								WAV_FILE.ChunkSize = aux_uint32.dword;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.ChunkSize, sizeof WAV_FILE.ChunkSize);
-								idx += sizeof WAV_FILE.ChunkSize;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.ChunkSize, sizeof WAV_FILE.ChunkSize);
+								//idx += sizeof WAV_FILE.ChunkSize;
 								i = 0;
 
 								estado_riff = __Format;
@@ -335,8 +311,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 								if (i == size_wave) {
 									WAV_FILE.WAVE[i] = '\0';
-									memcpy(&dbg_buffer[idx], WAV_FILE.WAVE, size_wave);
-									idx += size_wave;
+									//memcpy(&dbg_buffer[idx], WAV_FILE.WAVE, size_wave);
+									//idx += size_wave;
 									i = 0;
 
 									estado_riff = __ChunkID;
@@ -363,8 +339,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 								if (i == size_fmt) {
 									WAV_FILE.fmt[i] = '\0';
-									memcpy(&dbg_buffer[idx], WAV_FILE.fmt, size_fmt);
-									idx += size_fmt;
+									//memcpy(&dbg_buffer[idx], WAV_FILE.fmt, size_fmt);
+									//idx += size_fmt;
 									i = 0;
 
 									estado_fmt = __Subchunk1Size;
@@ -377,8 +353,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.Subchunk1Size) {
 								WAV_FILE.Subchunk1Size = aux_uint32.dword;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.Subchunk1Size, sizeof WAV_FILE.Subchunk1Size);
-								idx += sizeof WAV_FILE.Subchunk1Size;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.Subchunk1Size, sizeof WAV_FILE.Subchunk1Size);
+								//idx += sizeof WAV_FILE.Subchunk1Size;
 								i = 0;
 
 								estado_fmt = __AudioFormat;
@@ -391,8 +367,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.AudioFormat) {
 								WAV_FILE.AudioFormat = aux_uint16.word;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.AudioFormat, sizeof WAV_FILE.AudioFormat);
-								idx += sizeof WAV_FILE.AudioFormat;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.AudioFormat, sizeof WAV_FILE.AudioFormat);
+								//idx += sizeof WAV_FILE.AudioFormat;
 								i = 0;
 
 								estado_fmt = __NumOfChan;
@@ -405,8 +381,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.NumOfChan) {
 								WAV_FILE.NumOfChan = aux_uint16.word;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.NumOfChan, sizeof WAV_FILE.NumOfChan);
-								idx += sizeof WAV_FILE.NumOfChan;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.NumOfChan, sizeof WAV_FILE.NumOfChan);
+								//idx += sizeof WAV_FILE.NumOfChan;
 								i = 0;
 
 								estado_fmt = __SamplesPerSec;
@@ -419,8 +395,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.SamplesPerSec) {
 								WAV_FILE.SamplesPerSec = aux_uint32.dword;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.SamplesPerSec, sizeof WAV_FILE.SamplesPerSec);
-								idx += sizeof WAV_FILE.SamplesPerSec;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.SamplesPerSec, sizeof WAV_FILE.SamplesPerSec);
+								//idx += sizeof WAV_FILE.SamplesPerSec;
 								i = 0;
 
 								estado_fmt = __bytesPerSec;
@@ -433,8 +409,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.bytesPerSec) {
 								WAV_FILE.bytesPerSec = aux_uint32.dword;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.bytesPerSec, sizeof WAV_FILE.bytesPerSec);
-								idx += sizeof WAV_FILE.bytesPerSec;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.bytesPerSec, sizeof WAV_FILE.bytesPerSec);
+								//idx += sizeof WAV_FILE.bytesPerSec;
 								i = 0;
 
 								estado_fmt = __blockAlign;
@@ -447,8 +423,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.blockAlign) {
 								WAV_FILE.blockAlign = aux_uint16.word;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.blockAlign, sizeof WAV_FILE.blockAlign);
-								idx += sizeof WAV_FILE.blockAlign;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.blockAlign, sizeof WAV_FILE.blockAlign);
+								//idx += sizeof WAV_FILE.blockAlign;
 								i = 0;
 
 								estado_fmt = __bitsPerSample;
@@ -461,8 +437,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.bitsPerSample) {
 								WAV_FILE.bitsPerSample = aux_uint16.word;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.bitsPerSample, sizeof WAV_FILE.bitsPerSample);
-								idx += sizeof WAV_FILE.bitsPerSample;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.bitsPerSample, sizeof WAV_FILE.bitsPerSample);
+								//idx += sizeof WAV_FILE.bitsPerSample;
 								i = 0;
 
 								estado_fmt = __Subchunk1ID;
@@ -491,8 +467,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 								if (i == size_data_sc) {
 									WAV_FILE.Subchunk2ID[i] = '\0';
-									memcpy(&dbg_buffer[idx], WAV_FILE.Subchunk2ID, size_data_sc);
-									idx += size_data_sc;
+									//memcpy(&dbg_buffer[idx], WAV_FILE.Subchunk2ID, size_data_sc);
+									//idx += size_data_sc;
 									i = 0;
 
 									estado_data = __Subchunk2Size;
@@ -506,8 +482,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 							if (i == sizeof WAV_FILE.Subchunk2Size) {
 								WAV_FILE.Subchunk2Size = aux_uint32.dword;
-								memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.Subchunk2Size, sizeof WAV_FILE.Subchunk2Size);
-								idx += sizeof WAV_FILE.Subchunk2Size;
+								//memcpy(&dbg_buffer[idx], (char *)&WAV_FILE.Subchunk2Size, sizeof WAV_FILE.Subchunk2Size);
+								//idx += sizeof WAV_FILE.Subchunk2Size;
 								i = 0;
 
 								estado = BYTE_STOP;
@@ -524,7 +500,7 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 					break;
 
-				case __DATA:
+				case __DATA_BLK:
 					/* ***** data_file_packet ***** */
 					switch (estado_file_packet) {
 
@@ -533,8 +509,8 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 						if (i == sizeof file_packet.blockNumber) {
 							file_packet.blockNumber = aux_uint16.word;
-							memcpy(&dbg_buffer[idx], (char *)&file_packet.blockNumber, sizeof file_packet.blockNumber);
-							idx += sizeof file_packet.blockNumber;
+							//memcpy(&dbg_buffer[idx], (char *)&file_packet.blockNumber, sizeof file_packet.blockNumber);
+							//idx += sizeof file_packet.blockNumber;
 							i = 0;
 
 							estado_file_packet= __endPacket;
@@ -543,27 +519,46 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 						break;
 
 					case __endPacket:
-						dbg_buffer[idx++] = file_packet.endPacket = (uint8_t)dato_rx;
+						//dbg_buffer[idx++] = file_packet.endPacket = (uint8_t)dato_rx;
+						file_packet.endPacket = (uint8_t)dato_rx;
+
 						estado_file_packet = __lenDataPacket;
 						break;
 
 					case __lenDataPacket:
-						dbg_buffer[idx++] = file_packet.lenDataPacket = (uint8_t)dato_rx;
-						estado_file_packet = __Packet;
+						aux_uint16.array[i++] = (uint8_t)dato_rx;
+
+						if (i == sizeof file_packet.lenDataPacket) {
+							//dbg_buffer[idx++] = file_packet.lenDataPacket = (uint8_t)dato_rx;
+							file_packet.lenDataPacket = aux_uint16.word;
+							i = 0;
+
+							estado_file_packet = __Packet;
+						}
 
 						break;
 
 					case __Packet:
 						file_packet.dataPacket[i++] = (uint8_t)dato_rx;
 
-						if (i == file_packet.lenDataPacket) {
-							memcpy(&dbg_buffer[idx], file_packet.dataPacket, file_packet.lenDataPacket);
-							idx += file_packet.lenDataPacket;
-							i = 0;
-							estado_file_packet = __blockNumber;
+						i %= FILE_MAX_PACKET_SIZE;
 
+						if (i == 0) {
+							estado_file_packet = __blockNumber;
 							estado = BYTE_STOP;
 						}
+
+/*						if (i == file_packet.lenDataPacket) {
+							//memcpy(&dbg_buffer[idx], file_packet.dataPacket, file_packet.lenDataPacket);
+							//idx += file_packet.lenDataPacket;
+
+							//Serial_Load_SD_Buffer(sd_wr_buffer, file_packet.dataPacket, file_packet.lenDataPacket);
+							//memcpy((uint8_t *)sd_wr_buffer, file_packet.dataPacket, file_packet.lenDataPacket);
+
+							i = 0;
+							estado_file_packet = __blockNumber;
+							estado = BYTE_STOP;
+						}*/
 						break;
 
 					default:
@@ -582,32 +577,51 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 
 		case COMANDO:
 			if (dato_rx != STOP_BYTE) {
-				comando[i++] = dato_rx;
-
+				serial_data_desc->comando[i] = comando[i] = (char)dato_rx;
+				i++;
+				break;							// Se coloca este break para salir mientras recibe el comando
 			}
 			else {
-				comando[i] = '\0';
-				estado = BYTE_STOP;
+				serial_data_desc->comando[i] = comando[i] = '\0';
+				i = 0;
+				estado = BYTE_STOP;				// No se coloca break al final de case COMANDO para permitir llegar al estado BYTE_STOP
 			}
-
-			break;
 
 		case BYTE_STOP:
 			if (dato_rx == STOP_BYTE) {
-				dbg_buffer[idx++] = (uint8_t)dato_rx;
+				//dbg_buffer[idx++] = (uint8_t)dato_rx;
+				//usart_send_data(&usart_ctx[dbg_inst], dbg_buffer, idx);
 
-				usart_send_data(&usart_ctx[dbg_inst], dbg_buffer, idx);
+				serial_data_desc->end_pckt = 1;
+
+/*				if (packet_type == __RIFF) {
+					__asm volatile ("nop");
+				}*/
+
+				//Serial_Send_Confirmation(usart_instance, packet_type);
+
+				/*if (packet_type != __DATA_BLK) {
+					Serial_Send_Confirmation(usart_instance, packet_type);
+				} else {
+					//Serial_Load_SD_Buffer(sd_wr_buffer, file_packet.dataPacket, file_packet.lenDataPacket);
+					memcpy((uint8_t *)sd_wr_buffer, file_packet.dataPacket, file_packet.lenDataPacket);
+					//if (Serial_Load_SD_Buffer(sd_wr_buffer, file_packet.dataPacket, file_packet.lenDataPacket)) {
+						sd_write_flag_set();
+						Serial_Send_Confirmation(usart_instance, packet_type);
+					//}
+				}*/
+
+				/*if (packet_type == __COMMAND)
+					Serial_Analizar_Comando(usart_instance, comando);*/
 
 				i = 0;
-				idx = 0;
+				//idx = 0;
 				estado = BYTE_START;
 				packet_type = __notDefined;
 				estado_riff = __ChunkID;
 				estado_fmt = __Subchunk1ID;
 				estado_data = __Subchunk2ID;
 				estado_file_packet = __blockNumber;
-
-				Serial_Analizar_Comando(usart_instance, comando);
 			}
 
 			break;
@@ -618,567 +632,38 @@ void Serial_Analizar_Trama_v2(const uint8_t usart_instance)
 	}
 }
 
-#if 0
-void Serial_Analizar_Trama(const uint8_t usart_inst)
+void Serial_Send_Confirmation(const uint8_t usart_inst, const packet_types_t packet_type)
 {
-	typedef enum _estados_UART0 {
-		BYTE_START = 0,
-		TIPO,
-		AUDIO_DATA,
-		COMANDO,
-		BYTE_STOP
-	} estados_UART0_e;
+	static const response_packet_t responses = {
+					.resp_RIFF = "$RIFF_OK#",
+					.resp_fmt_subchunk = "$fmt_OK#",
+					.resp_data_subchunk = "$data_OK#",
+					.resp_DATA = "$Blk_OK#",
+	};
 
-	typedef enum _estados_fmt {
-		__Subchunk1Size = 0,
-		__AudioFormat,
-		__NumOfChan,
-		__SamplesPerSec,
-		__bytesPerSec,
-		__blockAlign,
-		__bitsPerSample
-	} estados_fmt;
-
-	typedef enum _estados_data {
-		__blockNumber = 0,
-		__endPacket,
-		__lenDataPacket,
-		__Packet,
-	} estados_data_t;
-
-	const uint8_t dbg_inst = 0;
-
-	static estados_UART0_e estado = BYTE_START;
-	static estados_fmt estado_fmt = __Subchunk1Size;
-	static estados_data_t estado_data = __blockNumber;
-	static char comando[LONG_MAX_CMD];
-	static uint32_t i,j,k,z,x;
-	static uint8_t idx_aux = 0;
-	static uint8_t flag_riff, flag_wave, flag_fmt, flag_data_sc, flag_data_sc2, flag_data_sc3, flag_sound_data, flag_data_sd, flag_end_data, packet_number;
-	static uint32_t* sound_data;
-
-	static buffer_uint32_union_t aux_uint32;
-	static buffer_uint16_union_t aux_uint16;
-
-	int32_t dato_rx = usart_pop_RX(&usart_ctx[usart_inst]);
-
-	if (dato_rx < 0)
-		return;
-
-	switch (estado) {
-		case BYTE_START:
-			if (dato_rx == START_BYTE) {
-
-				//usart_send_data(&usart_ctx[dbg_inst], (uint8_t *)&dato_rx, sizeof (uint8_t));
-
-				static uint8_t a = 0;
-
-				if (a == 0)
-					__asm volatile ("nop");
-				if (a == 1)
-					__asm volatile ("nop");
-				if (a == 2)
-					__asm volatile ("nop");
-				if (a == 3)
-					__asm volatile ("nop");
-
-				a++;
-
-				estado = TIPO;
-			}
-
+	switch (packet_type) {
+		case __RIFF:
+			usart_send_data(&usart_ctx[usart_inst], responses.resp_RIFF, strlen(responses.resp_RIFF));
 			break;
 
-		case TIPO:
-			if (dato_rx != STOP_BYTE)
-			{
-				//usart_send_data(&usart_ctx[dbg_inst], (uint8_t *)&dato_rx, sizeof (uint8_t));
-
-				static uint8_t d = 0;
-
-				if (dato_rx == 'R' || dato_rx == 'f' || dato_rx == 'd') {
-
-					if (dato_rx == 'R') {
-						__asm volatile ("nop");
-					}
-
-					if (dato_rx == 'f') {
-						__asm volatile ("nop");
-					}
-
-					if (dato_rx == 'd') {
-						if (d == 0)
-							__asm volatile ("nop");
-						if (d == 1)
-							__asm volatile ("nop");
-
-						d++;
-					}
-
-					estado = AUDIO_DATA;
-				}
-
-				if (dato_rx == 'C') {
-					//usart_send_data(&usart_ctx[dbg_inst], (uint8_t *)&dato_rx, sizeof (uint8_t));
-
-					estado = COMANDO;
-				}
-			}
+		case __fmtSubchunk:
+			usart_send_data(&usart_ctx[usart_inst], responses.resp_fmt_subchunk, strlen(responses.resp_fmt_subchunk));
 			break;
 
-		case AUDIO_DATA:
-			/*******************RIFF*******************/
-			if (_RIFF && (i < size_riff))
-			{
-				WAV_FILE.RIFF[i] = dato_rx;
-				i++;
-				estado = AUDIO_DATA;
-				if (i == size_riff)
-				{
-					WAV_FILE.RIFF[i] = '\0';
-
-					//usart_send_data(&usart_ctx[dbg_inst], WAV_FILE.RIFF, sizeof WAV_FILE.RIFF / sizeof WAV_FILE.RIFF[0]);
-
-					flag_riff = true;
-				}
-				break;
-			}
-
-			if (!strcmp(WAV_FILE.RIFF,"RIFF") && flag_riff) //compare, if its "RIFF" in WAVFILE.. continue...
-			{
-				aux_uint32.array[idx_aux++] = dato_rx;
-
-				if (idx_aux == sizeof(uint32_t)) {
-					WAV_FILE.ChunkSize = aux_uint32.dword;
-					//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.ChunkSize, sizeof WAV_FILE.ChunkSize);
-
-					estado = AUDIO_DATA;
-					idx_aux = 0;
-					flag_riff = false;
-				}
-
-				break;
-			}
-			else if(strcmp(WAV_FILE.RIFF,"RIFF"))
-			{
-				estado = BYTE_START;
-				break;
-			}
-
-			/*******************WAVE*******************/
-
-			if (_WAVE && !flag_riff && j < size_wave)
-			{
-				WAV_FILE.WAVE[j] = dato_rx;
-				j++;
-				estado = AUDIO_DATA;
-
-				if (j == size_wave)
-				{
-					WAV_FILE.WAVE[j] = '\0';
-					//usart_send_data(&usart_ctx[dbg_inst], WAV_FILE.WAVE, sizeof WAV_FILE.WAVE / sizeof WAV_FILE.WAVE[0]);
-
-					flag_wave = true;
-					estado = BYTE_STOP;
-				}
-				break;
-			}
-
-			if (!strcmp(WAV_FILE.WAVE,"WAVE") && flag_wave)			// simplificar
-				flag_wave = true;
-			else
-			{
-				flag_wave = false;
-				estado = BYTE_START;
-				break;
-			}
-
-			/*******************fmt*******************/
-
-			if (_fmt && flag_wave && k < size_fmt) //size_fmt is 4, "fmt ";
-			{
-				WAV_FILE.fmt[k] = dato_rx;
-				k++;
-				estado = AUDIO_DATA;
-
-				if (k == size_fmt)
-				{
-					WAV_FILE.fmt[k] = '\0';
-					//usart_send_data(&usart_ctx[dbg_inst], WAV_FILE.fmt, sizeof WAV_FILE.fmt / sizeof WAV_FILE.fmt[0]);
-
-					flag_fmt = true;
-				}
-				break;
-			}
-
-			//if (!strcmp(WAV_FILE.fmt,"fmt "))
-				//flag_fmt = true;
-			//else
-			if (strcmp(WAV_FILE.fmt,"fmt ")) {
-				flag_fmt = false;
-				estado = BYTE_START;
-				break;
-			}
-
-			if (flag_fmt)
-			{
-				switch (estado_fmt)
-				{
-					case __Subchunk1Size:
-
-						aux_uint32.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint32_t)) {
-							WAV_FILE.Subchunk1Size = aux_uint32.dword;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.Subchunk1Size, sizeof WAV_FILE.Subchunk1Size);
-
-							idx_aux = 0;
-							estado_fmt = __AudioFormat;
-						}
-
-					break;
-
-					case __AudioFormat:
-
-						aux_uint16.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint16_t)) {
-							WAV_FILE.AudioFormat = aux_uint16.word;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.AudioFormat, sizeof WAV_FILE.AudioFormat);
-
-							idx_aux = 0;
-							estado_fmt = __NumOfChan;
-						}
-
-					break;
-
-					case __NumOfChan:
-
-						aux_uint16.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint16_t)) {
-							WAV_FILE.NumOfChan = aux_uint16.word;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.NumOfChan, sizeof WAV_FILE.NumOfChan);
-
-							idx_aux = 0;
-							estado_fmt = __SamplesPerSec;
-						}
-
-					break;
-
-					case __SamplesPerSec:
-
-						aux_uint32.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint32_t)) {
-							WAV_FILE.SamplesPerSec = aux_uint32.dword;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.SamplesPerSec, sizeof WAV_FILE.SamplesPerSec);
-
-							idx_aux = 0;
-							estado_fmt = __bytesPerSec;
-						}
-
-					break;
-
-					case __bytesPerSec:
-
-						aux_uint32.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint32_t)) {
-							WAV_FILE.bytesPerSec = aux_uint32.dword;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.bytesPerSec, sizeof WAV_FILE.bytesPerSec);
-
-							idx_aux = 0;
-							estado_fmt = __blockAlign;
-						}
-
-					break;
-
-					case __blockAlign:
-
-						aux_uint16.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint16_t)) {
-							WAV_FILE.blockAlign = aux_uint16.word;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.blockAlign, sizeof WAV_FILE.blockAlign);
-
-							idx_aux = 0;
-							estado_fmt = __bitsPerSample;
-						}
-
-					break;
-
-					case __bitsPerSample:
-
-						aux_uint16.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint16_t)) {
-							WAV_FILE.bitsPerSample = aux_uint16.word;
-							//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.bitsPerSample, sizeof WAV_FILE.bitsPerSample);
-
-							idx_aux = 0;
-							estado_fmt++;
-						}
-
-					break;
-				}
-
-				if (estado_fmt <= __bitsPerSample) {
-					estado = AUDIO_DATA;
-					break;
-				}
-				else {
-					flag_fmt = false;
-					estado_fmt = __Subchunk1Size;
-					flag_data_sc = true;
-					estado = BYTE_STOP;
-					break;
-				}
-			}
-
-			/*******************DATA*******************/
-			/******************data_sc*****************/
-
-			if (_data && flag_data_sc)
-			{
-				if (_data && z < size_data_sc)
-				{
-					WAV_FILE.Subchunk2ID[z++] = dato_rx;
-
-					if (z == size_data_sc) {
-						WAV_FILE.Subchunk2ID[z] = '\0';
-						//usart_send_data(&usart_ctx[dbg_inst], WAV_FILE.Subchunk2ID, sizeof WAV_FILE.Subchunk2ID / sizeof WAV_FILE.Subchunk2ID[0]);
-
-						flag_data_sc2 = true;
-					}
-					estado = AUDIO_DATA;
-					break;
-				}
-
-				if (!strcmp(WAV_FILE.Subchunk2ID,"data") && flag_data_sc2)
-					flag_data_sc2 = true;
-				else
-				{
-					flag_data_sc2 = false;
-					estado = BYTE_START;
-					break;
-				}
-
-/*				if (packet_number == -1)
-				{
-					packet_number = dato_rx;
-					if (packet_number == 0)
-					{
-						flag_data_sc2 = true;
-						estado = AUDIO_DATA;
-						break;
-					}
-					else //protection
-					{
-						estado = BYTE_START;
-						break;
-					}
-				}
-
-				if (flag_data_sc2)
-				{
-					if (_data && z < size_data_sc)
-					{
-						WAV_FILE.Subchunk2ID[z] = dato_rx;
-						z++;
-						if (z == size_data_sc)
-						{
-							WAV_FILE.Subchunk2ID[z] = '\0';
-							flag_data_sc3 = true;
-						}
-						estado = AUDIO_DATA;
-						break;
-					}
-
-					if (flag_data_sc3)
-					{
-						WAV_FILE.Subchunk2Size = dato_rx;
-						sound_data = sizeof(WAV_FILE.Subchunk2Size);
-						flag_data_sc = false;
-						flag_data_sc2 = false;
-						flag_data_sc3 = false;
-						flag_sound_data = true;
-						packet_number = -1;
-						estado = AUDIO_DATA;
-						break;
-					}
-				}*/
-			}
-
-			if (flag_data_sc2 == true) {
-
-				aux_uint32.array[idx_aux++] = dato_rx;
-
-				if (idx_aux == sizeof(uint32_t)) {
-					WAV_FILE.Subchunk2Size = aux_uint32.dword;
-					//usart_send_data(&usart_ctx[dbg_inst], &WAV_FILE.Subchunk2Size, sizeof WAV_FILE.Subchunk2Size);
-
-					flag_data_sc = false;
-					flag_data_sc2 = false;
-					flag_data_sc3 = false;
-					flag_sound_data = true;
-					idx_aux = 0;
-
-					estado = BYTE_STOP;
-					break;
-				}
-			}
-			/****************SOUND DATA******************/
-
-			if (flag_sound_data)
-			{
-				// filePacket.blockNumber + filePacket.endPacket + filePacket.lenDataPacket + Paquete
-
-			    //uint16_t 	dataLenght;								// Longitud del paquete de Data
-			    //uint16_t 	blockNumber;							// Número de bloque de datos de Firmware.
-			    //uint8_t 	endPacket;								// Indica si es el bloque final de envío del FW: 0x00 = Continúan mas paquetes, 0x01 = Último paquete
-			    //uint8_t 	lenDataPacket;							// Largo de datos del paquete. Máximo 128 bytes.
-			    //uint8_t 	dataPacket[FILE_MAX_PACKET_SIZE];       // Paquete de datos del archivo WAV.
-
-				switch (estado_data) {
-					case __blockNumber:
-						aux_uint16.array[idx_aux++] = dato_rx;
-
-						if (idx_aux == sizeof(uint16_t)) {
-							file_packet.blockNumber = aux_uint16.word;
-							idx_aux = 0;
-
-							estado_data = __endPacket;
-						}
-
-						estado_data = __blockNumber;
-
-						break;
-
-					case __endPacket:
-						file_packet.endPacket = dato_rx;
-						estado_data = __lenDataPacket;
-
-						break;
-
-					case __lenDataPacket:
-						file_packet.lenDataPacket = dato_rx;
-						estado_data = __Packet;
-
-						break;
-
-					case __Packet:
-						file_packet.dataPacket[idx_aux++] = dato_rx;
-
-						if (idx_aux == FILE_MAX_PACKET_SIZE) {
-							idx_aux = 0;
-							estado_data = __blockNumber;
-
-							estado = BYTE_STOP;
-						}
-
-						break;
-
-					default:
-						break;
-				}
-
-
-/*				if (packet_number == -1)
-				{
-					packet_number = dato_rx;
-					if (packet_number == 1)
-					{
-						flag_data_sd = true;
-						estado = AUDIO_DATA;
-						break;
-					}
-					else //protection
-					{
-						estado = BYTE_START;
-						break;
-					}
-				}*/
-
-/*				if (flag_data_sd)
-				{
-					if (packet_number < WAV_FILE.Subchunk2Size/128) //this division is the num of packets
-					{
-						if (x < 128/sizeof(dato_rx)) //if x < 32, luego 32x4 = 128 -> bytes cargados
-						{
-							sound_data[x + (packet_number-1)*(128/sizeof(dato_rx))] = dato_rx;
-							x++;
-							estado = AUDIO_DATA;
-							break;
-						}
-						else 				//cuando pasen los 128 bytes
-						{
-							x = 0;
-							packet_number = dato_rx; // en la sig pasada recibo el sig packet_number
-							estado = AUDIO_DATA;
-							break;
-						}
-					}
-					else
-					{
-						flag_data_sd = false;
-						flag_sound_data = false;
-						flag_end_data = true;
-						estado = BYTE_STOP;
-						break;
-					}
-				}*/
-			}
-
-		break;
-
-		/******************COMANDO**********************/
-
-		case COMANDO:
-			if (dato_rx != STOP_BYTE) {
-				comando[i] = dato_rx;
-				i++;
-				estado = COMANDO;
-				break;
-			}
-			else {
-				comando[i] = '\0';
-				estado = BYTE_STOP;
-			}
-		break;
-
-		case BYTE_STOP:
-			if (dato_rx == STOP_BYTE) {
-				i = 0;
-
-				static uint8_t b = 0;
-
-				if (b == 0)
-					__asm volatile ("nop");
-				if (b == 1)
-					__asm volatile ("nop");
-				if (b == 2)
-					__asm volatile ("nop");
-				if (b == 3)
-					__asm volatile ("nop");
-
-				b++;
-
-				estado = BYTE_START;
-
-				Serial_Analizar_Comando(usart_inst, comando);
-			}
-		break;
+		case __dataSubchunk:
+			usart_send_data(&usart_ctx[usart_inst], responses.resp_data_subchunk, strlen(responses.resp_data_subchunk));
+			break;
+
+		case __DATA_BLK:
+			usart_send_data(&usart_ctx[usart_inst], responses.resp_DATA, strlen(responses.resp_DATA));
+			break;
 
 		default:
-
-		break;
+			break;
 	}
 }
-#endif
 
-
-void Serial_Analizar_Comando(const uint8_t usart_inst, const char comando[])
+commands_rx_en Serial_Analizar_Comando(const uint8_t usart_inst, const char comando[])
 {
 	static const commands_rx_t commands = {
 			.cmd_play = "PLAY",
@@ -1186,38 +671,62 @@ void Serial_Analizar_Comando(const uint8_t usart_inst, const char comando[])
 			.cmd_stop = "STOP"
 	};
 
-	static const response_tx_t responses = {
-				.resp_play = "#PLAY_OK$",
-				.resp_pause = "#PAUSA_OK$",
-				.resp_stop = "#STOP_OK$"
+	static const response_cmd_tx_t responses = {
+			.resp_play = "$PLAY_OK#",
+			.resp_pause = "$PAUSA_OK#",
+			.resp_stop = "$STOP_OK#"
 		};
 
-	if (!strcmp(comando, commands.cmd_play)) {
-		//LED_ROJO_OFF;
-		//LED_AZUL_OFF;
-		//LED_VERDE_ON;
+	commands_rx_en ret_command = __undefined_CMD;
 
+	if (!strcmp(comando, commands.cmd_play)) {
+		ret_command = __PLAY;
 		usart_send_data(&usart_ctx[usart_inst], responses.resp_play, strlen(responses.resp_play));
 	}
 	else if (!strcmp(comando, commands.cmd_pause)) {
-		//LED_VERDE_OFF;
-		//LED_ROJO_OFF;
-		//LED_AZUL_ON;
-
+		ret_command = __PAUSE;
 		usart_send_data(&usart_ctx[usart_inst], responses.resp_pause, strlen(responses.resp_pause));
 	}
 	else if (!strcmp(comando, commands.cmd_stop)) {
-		//LED_AZUL_OFF;
-		//LED_VERDE_OFF;
-		//LED_ROJO_ON;
-
+		ret_command = __STOP;
 		usart_send_data(&usart_ctx[usart_inst], responses.resp_stop, strlen(responses.resp_stop));
 	}
 	else {
 
 	}
+
+	return ret_command;
 }
 
+
+int8_t Serial_Load_SD_Buffer(volatile uint8_t sd_wr_buffer[], const uint8_t data_packet[], const size_t data_packet_length)
+{
+	const uint16_t qty_sub_pckts = SD_DATA_SIZE / data_packet_length;
+	const uint16_t last_packet_size = data_packet_length % SD_DATA_SIZE;
+
+	static uint16_t idx = 0;
+	static uint32_t i = 0;
+
+	int8_t result = 1;
+
+	if (data_packet_length <= SD_DATA_SIZE ) {
+		if (i < qty_sub_pckts) {
+			memcpy((uint8_t *)&sd_wr_buffer[idx], data_packet, data_packet_length);
+			idx += data_packet_length;
+			i++;
+		}
+
+		if (i == qty_sub_pckts) {
+			idx = 0;
+			i = 0;
+		}
+	}
+	else {
+		result = 0;
+	}
+
+	return result;
+}
 
 /* ------------------------------------------------------------------------------- */
 /*

@@ -65,7 +65,6 @@ DSTATUS disk_status (
 
 DSTATUS disk_initialize (
 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
-
 )
 {
 	DSTATUS stat;
@@ -95,6 +94,7 @@ DSTATUS disk_initialize (
 		return stat;
 #endif
 	}
+
 	return STA_NOINIT;
 }
 
@@ -128,7 +128,13 @@ DRESULT disk_read (
 	case DEV_MMC :
 		// translate the arguments here
 
-		result = MMC_disk_read(buff, sector, count);
+		//result = MMC_disk_read(buff, sector, count);
+
+		if (count > 1) {
+
+		} else {
+			result = sd_read_single_block(spi_get_configured_instance(), sector, buff);
+		}
 
 		// translate the reslut code here
 

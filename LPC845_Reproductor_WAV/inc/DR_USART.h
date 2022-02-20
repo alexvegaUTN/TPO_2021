@@ -402,5 +402,4 @@ void USART_set_address(uint8_t inst, uint32_t addr);
 
 void USART_write_TX_reg(uint8_t inst, uint8_t datoTx);
 
-
 #endif /* DR_USART_H_ */

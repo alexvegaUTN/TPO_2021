@@ -41,11 +41,19 @@ public:
 
     enum
     {
-        ESPERO_MENSAJE,
-        RECIBO_MENSAJE_MSB,
-        RECIBO_MENSAJE_LSB,
+        ESPERO_MENSAJE = 0,
+        RECIBO_MENSAJE,
         FIN_DE_TRAMA,
     };
+
+    typedef enum _estdos_infoWAV
+    {
+        __RRIF = 0,
+        __FMT,
+        __DATA,
+        __BLOQUE,
+        __ESPERA,
+    }estdos_infoWAV_t;
 
 private slots:
 
@@ -64,8 +72,11 @@ private:
     Ui::MainWindow *ui;
     QMediaPlayer *reproductor;
     QSerialPort  *port;
-    QByteArray  datosRecibidos;
-
+    //QByteArray  datosRecibidos;
+    QVector<char> datosRecibidos;
+    QString     Path_fileName;
+    unsigned int estado_infoWAV;
+    uint32_t block_idx;
 
 };
 #endif // MAINWINDOW_H

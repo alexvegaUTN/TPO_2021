@@ -1,0 +1,8 @@
+../src/PR_Timer.c:63:6:Timer_Event	16	static
+../src/PR_Timer.c:75:8:Timer_Start	40	static
+../src/PR_Timer.c:104:8:Timer_Set	32	static
+../src/PR_Timer.c:129:10:Timer_Get	32	static
+../src/PR_Timer.c:152:6:Timer_Standby	16	static
+../src/PR_Timer.c:157:18:Timer_Activity_Get	16	static
+../src/PR_Timer.c:165:6:Timer_Stop	16	static
+../src/PR_Timer.c:176:6:Timer_Close	16	static

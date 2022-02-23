@@ -1,0 +1,10 @@
+../src/PR_Leds.c:62:6:leds_init	8	static
+../src/PR_Leds.c:75:6:led_verde_on	8	static
+../src/PR_Leds.c:80:6:led_verde_off	8	static
+../src/PR_Leds.c:85:6:led_verde_toggle	8	static
+../src/PR_Leds.c:90:6:led_azul_on	8	static
+../src/PR_Leds.c:95:6:led_azul_off	8	static
+../src/PR_Leds.c:100:6:led_azul_toggle	8	static
+../src/PR_Leds.c:105:6:led_rojo_on	8	static
+../src/PR_Leds.c:110:6:led_rojo_off	8	static
+../src/PR_Leds.c:115:6:led_rojo_toggle	8	static

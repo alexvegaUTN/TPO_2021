@@ -1,6 +1,0 @@
-/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/CMSIS/core_cm0plus.h:741:22:__NVIC_EnableIRQ	16	static
-/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_common_arm.h:488:24:EnableIRQ	24	static
-/home/federico/Documents/MCUXpresso_11.4.1_6260/workspace/LPC845_Project_Demo/drivers/fsl_usart.h:402:20:USART_EnableInterrupts	16	static
-../board/peripherals.c:103:13:USART0_init	8	static
-../board/peripherals.c:114:6:BOARD_InitPeripherals	8	static
-../board/peripherals.c:123:6:BOARD_InitBootPeripherals	8	static

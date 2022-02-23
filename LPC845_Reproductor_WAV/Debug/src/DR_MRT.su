@@ -1,0 +1,9 @@
+../src/DR_MRT.c:66:6:MRT_set_interval	16	static
+../src/DR_MRT.c:76:6:MRT_set_interval_and_stop_timer	16	static
+../src/DR_MRT.c:86:10:MRT_get_current_value	16	static
+../src/DR_MRT.c:95:6:MRT_enable_irq	16	static
+../src/DR_MRT.c:104:6:MRT_disable_irq	16	static
+../src/DR_MRT.c:114:6:MRT_config_mode	16	static
+../src/DR_MRT.c:123:9:MRT_get_idle_channel	8	static
+../src/DR_MRT.c:133:9:MRT_get_irq_flag	16	static
+../src/DR_MRT.c:150:6:MRT_clear_irq_flag	16	static

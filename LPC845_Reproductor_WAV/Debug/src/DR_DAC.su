@@ -1,0 +1,11 @@
+../src/DR_DAC.c:69:6:DAC_write	16	static
+../src/DR_DAC.c:79:6:DAC_config_settling_time	16	static
+../src/DR_DAC.c:88:6:DAC_enable_DMA_request	16	static
+../src/DR_DAC.c:97:6:DAC_disable_DMA_request	16	static
+../src/DR_DAC.c:106:6:DAC_enable_double_buffer	16	static
+../src/DR_DAC.c:115:6:DAC_disable_double_buffer	16	static
+../src/DR_DAC.c:124:6:DAC_enable_timer	16	static
+../src/DR_DAC.c:133:6:DAC_disable_timer	16	static
+../src/DR_DAC.c:142:6:DAC_enable_DMA	16	static
+../src/DR_DAC.c:151:6:DAC_disable_DMA	16	static
+../src/DR_DAC.c:161:6:DAC_write_reaload_value	16	static
